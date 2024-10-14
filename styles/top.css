@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+body{ 
+    background-color: #f4feff;
+    color: rgb(20, 31, 41);
+    margin: 0;
+    padding:0;
+    border: 0px;
+}
+nav{
+    width: 100vw;
+    position: sticky;
+    top: 0;
+    overflow: hidden;
+    background-color: #555454;
+    margin: 0;
+}
+.nav-in{
+    display: flex;
+    justify-content: space-between;
+    margin: auto 2vw;
+}
+.nav-in h2{
+    color: #FFFFFF;
+    font-family: "Nunito", monospace;
+}
+.cont-nav{
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    font-family: "Albert Sans", monospace;
+    color: #FF0000;
+    gap: 2vw;
+}

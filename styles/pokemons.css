@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 5vw;
+    margin-top: 5vh;
+
+}
+.card{
+    background-color: #e5eaeb;
+    width: 300px;
+    height: 450px;  
+    text-align: center;
+    border-radius: 5px;
+}
+.card h2{
+    color: rgb(255, 0, 0);
+    font-family: "Nunito",monospace;
+    font-size: 22px;
+}
+.card img{
+    width: 300px;
+    height: 300px;
+    margin-top: 10px auto;
+}
+
+h1{
+    font-family: "Albert Sans", monospace;
+    font-size: 30px;
+    color: #3d3d3d;
+    margin-bottom: 0;
+}
+.top-info h2{
+    font-family: "Albert Sans", monospace;
+    font-size: 16px;
+    color: #3d3d3d;
+    margin-top: 0;
+    margin-bottom: 5vh;
+}
+.top-info{
+    text-align: center;
+    margin: 0 auto;
+    align-items: center;
+}
+.top-info input{
+    background-color: #F7F7F7;
+    border: 3px solid #737373;
+    border-radius: 7px;
+    font-family: "Nunito", monospace;
+    color: #3d3d3d;
+    font-size: 16px;
+    overflow: hidden;
+}
+.top-info input::placeholder{
+    color: #d4d4d4;
+    font-family: "Nunito", monospace;
+}
+.top-info button{
+    background-color: #E63434;
+    color: #FFFFFF;
+    font-family: "Nunito", monospace;
+    font-weight: 900;
+    border: solid #E63434 2px;
+    border-radius: 5px;
+}

@@ -24,28 +24,40 @@ db.connect((error)=>{
     }
 })
 
-app.get("/", (req, res)=>{
+/* app.get("/pokemons", (req, res)=>{
     //query through db w/ SQL
     db.query("SELECT nome, nvl FROM Pokemon", (error, results) => {
     if(error){
-        console.log("Ocorreu um eroo ao buscar todos os pokemons", error);
+        console.log("Ocorreu um erro ao buscar todos os pokemons", error);
     }
     else{
-        
-        res.render("home", {pokemons : results});
 
-        /* sem ejs:
-        res.send(results); //out to page
-        console.log(results); //out to console */
+        res.render("/views/pokemons.ejs", {pokemons : results});
+
+        //sem ejs:
+        //res.send(results); //out to page
+        //console.log(results); //out to console
     }
 })
-});
+}); */
 
-app.get("pokemons", (req, res)=>{
-    res.sendFile(__dirname + "pokemons.ejs")
+app.get("/", (req, res)=>{
+    res.render(__dirname + "/views/home.ejs")
+})
+app.get("/pokemons", (req, res) => {
+    db.query("SELECT nome, nvl, link FROM Pokemon", (error, results) => {
+        if (error) {
+            console.log("Ocorreu um erro ao buscar todos os pokemons", error);
+        } else {
+            res.render("pokemons", { pokemons: results }); // Passando os dados para a view
+        }
+    });
+});
+app.get("/trainers", (req, res)=>{
+    res.render(__dirname + "/views/trainers.ejs")
 })
 
-app.get("/pesquisarHome", (req, res) =>{
+app.get("/pesquisarPoke", (req, res) =>{
     const pesquisa = req.query.pesquisa;
     db.query("SELECT nome, nvl FROM pokemon WHERE nome LIKE ?", [`%${pesquisa}%`], (error, results) => { // ? (subs)-> ${pesquisa} com a devida formatação e expressão
         if(error){
