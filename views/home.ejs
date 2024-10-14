@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poké Poké</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-in">
+            <h2>PokéLife</h2>
+            <div class="cont-nav">
+                <h3>Pokémons</h3>
+                <h3>Treinadores</h3>
+                <h3>Batalhas</h3>
+            </div>
+        </div>
+    </nav>
+    <div class="top-info">
+        <h1>Conheça os fofos</h1>
+        <h2>Que fazem parte da nossa comunidade</h2>
+        <form action="/pesquisarHome" method="get">
+            <input type="search" name="pesquisa" placeholder="Pokemon">
+            <button type="submit">Pesquisar</button>
+        </form>
+    </div>
+
+    <div class="container">
+        <%pokemons.forEach((pokemon)=>{ /*pokemons é uma lista de objetos 'pokemon', que serao iterados*/ %> 
+        <div class="card">
+            <h2><b><%= pokemon.nome %></b></h2>
+            
+            <img src="" alt="<%= pokemon.nome %>" class="imgPoke">
+
+            <h3>Nvl: <%=pokemon.nvl %></h3>
+            <h3>Treinador: </h3>
+        </div>
+        <%})%>
+    </div>
+</body>
+</html>
