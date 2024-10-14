@@ -41,6 +41,10 @@ app.get("/", (req, res)=>{
 })
 });
 
+app.get("pokemons", (req, res)=>{
+    res.sendFile(__dirname + "pokemons.ejs")
+})
+
 app.get("/pesquisarHome", (req, res) =>{
     const pesquisa = req.query.pesquisa;
     db.query("SELECT nome, nvl FROM pokemon WHERE nome LIKE ?", [`%${pesquisa}%`], (error, results) => { // ? (subs)-> ${pesquisa} com a devida formatação e expressão

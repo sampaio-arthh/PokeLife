@@ -17,26 +17,13 @@
             </div>
         </div>
     </nav>
-    <div class="top-info">
-        <h1>Conheça os fofos</h1>
-        <h2>Que fazem parte da nossa comunidade</h2>
-        <form action="/pesquisarHome" method="get">
-            <input type="search" name="pesquisa" placeholder="Pokemon">
-            <button type="submit">Pesquisar</button>
-        </form>
-    </div>
 
     <div class="container">
-        <%pokemons.forEach((pokemon)=>{ /*pokemons é uma lista de objetos 'pokemon', que serao iterados*/ %> 
-        <div class="card">
-            <h2><b><%= pokemon.nome %></b></h2>
-            
-            <img src="" alt="<%= pokemon.nome %>" class="imgPoke">
+        <h1>PokéLife</h1>
+        <h2>Conheça a comunidade pokémon</h2>
 
-            <h3>Nvl: <%=pokemon.nvl %></h3>
-            <h3>Treinador: </h3>
-        </div>
-        <%})%>
+        <a href="pokemons"><button>Conhecer pokémons</button></a>
+        <a href="trainers"><button>Conhecer treinadores</button></a>
     </div>
 </body>
 </html>
