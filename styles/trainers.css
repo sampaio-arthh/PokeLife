@@ -1,0 +1,14 @@
+.treinador h3 {
+  font-family: "Nunito", monospace;
+  font-size: 28px; /* testar e trocar */
+}
+.treinador h4 {
+  font-family: "Montserrat", monospace;
+  font-size: 20px; /* testar e trocar */
+}
+.treinador:nth-child(odd) {
+  background-color: #b4bebb; /* testar e trocar */
+}
+.treinador:nth-child(even) {
+  background-color: #f4feff; /* testar e trocar */
+}
