@@ -69,6 +69,18 @@ app.get("/pesquisarPoke", (req, res) =>{
     })
 });
 
+app.get("/pesquisarTrainer", (req, res) =>{
+    const pesquisa = req.query.pesquisa;
+    db.query("SELECT nome, cidade, idade FROM treinador WHERE nome LIKE ?", [`%${pesquisa}%`], (error, results) => { // ? (subs)-> ${pesquisa} com a devida formatação e expressão
+        if(error){
+            console.log("Houve um erro ao realizar a pesquisa");
+        }
+        else{
+            res.render("trainers", { pokemons : results }) //results são os resultados da pesquisa que usa o LIKE
+        }
+    })
+});
+
 app.use(express.static(__dirname + '/styles'));
 
 app.listen(port, ()=>{
