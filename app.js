@@ -59,12 +59,22 @@ app.get("/trainers", (req, res)=>{
 
 app.get("/pesquisarPoke", (req, res) =>{
     const pesquisa = req.query.pesquisa;
-    db.query("SELECT nome, nvl FROM pokemon WHERE nome LIKE ?", [`%${pesquisa}%`], (error, results) => { // ? (subs)-> ${pesquisa} com a devida formatação e expressão
+    db.query("SELECT nome, nvl, link FROM pokemon WHERE nome LIKE ?", [`%${pesquisa}%`], (error, results) => { // ? (subs)-> ${pesquisa} com a devida formatação e expressão
         if(error){
             console.log("Houve um erro ao realizar a pesquisa");
         }
         else{
-            res.render("home", { pokemons : results }) //results são os resultados da pesquisa que usa o LIKE
+            res.render("pokemons", { pokemons : results }) //results são os resultados da pesquisa que usa o LIKE
+            //troquei de "home" para "pokemons" pq pode ser a pagina errada, testar
+        }
+    })
+    //teste para buscar o treinador do pokemon respectivo, o ideal é que volte um [{nomePoke, nomeTreinador}, ...]
+    db.query("SELECT nome FROM treinador t INNER JOIN treinador_pokemon tp ON t.id_treinador = tp.id_treinador INNER JOIN pokemon p ON tp.id_pokemon = ?", [`${idPoke}%`], (error, results) => {
+	    if(error){
+    		console.log("Houve um erro na busca do treinador")
+        }
+        else{
+            res.render("pokemons", {pokemons : results})
         }
     })
 });
