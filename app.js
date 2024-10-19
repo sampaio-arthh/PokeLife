@@ -79,7 +79,7 @@ app.get("/trainers", (req, res)=>{
 
 app.get("/pesquisarTrainer", (req, res) =>{
     const pesquisa = req.query.pesquisa;
-    db.query("SELECT nome, cidade, idade FROM treinador t WHERE t.nome LIKE ? OR t.cidade = ? OR CAST(idade AS CHAR) = ?", [`%${pesquisa}%`, pesquisa, pesquisa], (error, results) => {
+    db.query("SELECT t.id_treinador, t.nome, t.idade, t.cidade, COUNT(b.id_treinador_vencedor) AS vitorias FROM treinador t LEFT JOIN batalha b ON t.id_treinador = b.id_treinador_vencedor WHERE t.nome LIKE ? OR t.cidade = ? OR CAST(idade AS CHAR) = ? GROUP BY t.id_treinador, t.nome, t.idade, t.cidade", [`%${pesquisa}%`, pesquisa, pesquisa], (error, results) => {
         if(error){
             console.log("Houve um erro ao realizar a pesquisa\n", error);
         }
@@ -88,6 +88,11 @@ app.get("/pesquisarTrainer", (req, res) =>{
         }
     })
 });
+
+app.get("/battles", (req, res)=>{
+    res.render(__dirname + "/views/battles.ejs")
+})
+
 app.use(express.static(__dirname + '/styles'));
 
 app.listen(port, ()=>{
