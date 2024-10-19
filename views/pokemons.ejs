@@ -10,11 +10,11 @@
 <body>
     <nav>
         <div class="nav-in">
-            <h2>PokéLife</h2>
+            <a href="/"><h2>PokéLife</h2></a>
             <div class="cont-nav">
-                <h3>Pokémons</h3>
-                <h3>Treinadores</h3>
-                <h3>Batalhas</h3>
+                <a href="pokemons"><h3>Pokémons</h3></a>
+                <a href="trainers"><h3>Treinadores</h3></a>
+                <a href="battles"><h3>Batalhas</h3></a>
             </div>
         </div>
     </nav>
@@ -35,7 +35,7 @@
             <img src="<%= pokemon.link %>" alt="<%= pokemon.nome %>" class="imgPoke">
 
             <h3>Nvl: <%=pokemon.nvl %></h3>
-            <h3>Treinador: </h3>
+            <h3>Treinador: <%=pokemon.Tnome %></h3>
         </div>
         <%})%>
     </div>
