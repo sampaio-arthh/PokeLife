@@ -1,11 +1,11 @@
-//require package mysql2
+//Definição bibliotecas
 const mysql = require("mysql2");
 const express = require("express");
 const ejs = require("ejs");
 
 const app = express();
 const port = 3000;
-app.set("view engine", "ejs"); //avisando que usa o ejs
+app.set("view engine", "ejs"); //Definindo ejs como método de exibição
 
 //inst conex + spec
 const db = mysql.createConnection({
