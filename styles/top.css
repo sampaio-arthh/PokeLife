@@ -1,11 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap');
-body{ 
-    background-color: #f4feff;
-    color: rgb(20, 31, 41);
+* {
+    box-sizing: border-box; /* Importante para controlar a largura total */
     margin: 0;
     padding:0;
     border: 0px;
+}
+html, body {
+    width: 100%;
+    overflow-x: hidden; /* Para evitar rolagem horizontal */
+}
+body{ 
+    background-color: #f4feff;
+    color: rgb(20, 31, 41);
 }
 nav{
     width: 100vw;
@@ -13,12 +20,13 @@ nav{
     top: 0;
     overflow: hidden;
     background-color: #555454;
-    margin: 0;
+    padding: 10px 2vw;
+    margin-bottom: 5vh;
 }
 .nav-in{
     display: flex;
     justify-content: space-between;
-    margin: auto 2vw;
+    width: 100%;
 }
 .nav-in h2{
     color: #FFFFFF;
@@ -31,4 +39,46 @@ nav{
     font-family: "Albert Sans", monospace;
     color: #FF0000;
     gap: 2vw;
+}
+a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: inherit;
+}
+.top-info h2{
+    font-family: "Albert Sans", monospace;
+    font-size: 16px;
+    color: #3d3d3d;
+    margin-top: 0;
+    margin-bottom: 5vh;
+}
+.top-info{
+    text-align: center;
+}
+.top-info h1{
+    font-family: "Albert Sans", monospace;
+    font-size: 30px;
+    color: #3d3d3d;
+    margin-bottom: 0;
+}
+.top-info input{
+    background-color: #F7F7F7;
+    border: 3px solid #737373;
+    border-radius: 7px;
+    font-family: "Nunito", monospace;
+    color: #3d3d3d;
+    font-size: 16px;
+    overflow: hidden;
+}
+.top-info input::placeholder{
+    color: #d4d4d4;
+    font-family: "Nunito", monospace;
+}
+.top-info button{
+    background-color: #E63434;
+    color: #FFFFFF;
+    font-family: "Nunito", monospace;
+    font-weight: 900;
+    padding: 2px;
+    border: solid #E63434 2px;
+    border-radius: 5px;
 }

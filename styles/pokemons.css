@@ -6,8 +6,13 @@
     flex-wrap: wrap;
     justify-content: space-around;
     gap: 5vw;
-    margin-top: 5vh;
+    margin: 5vh 0;
 
+}
+body{
+    height: auto;
+    width: 100vw;
+    max-width: 100vw;
 }
 .card{
     background-color: #e5eaeb;
@@ -21,6 +26,11 @@
     font-family: "Nunito",monospace;
     font-size: 22px;
 }
+.card h3{
+    color: rgb(64, 64, 64);
+    font-family: "Nunito",monospace;
+    font-size: 16px;
+}
 .card img{
     width: 300px;
     height: 300px;
@@ -32,37 +42,4 @@ h1{
     font-size: 30px;
     color: #3d3d3d;
     margin-bottom: 0;
-}
-.top-info h2{
-    font-family: "Albert Sans", monospace;
-    font-size: 16px;
-    color: #3d3d3d;
-    margin-top: 0;
-    margin-bottom: 5vh;
-}
-.top-info{
-    text-align: center;
-    margin: 0 auto;
-    align-items: center;
-}
-.top-info input{
-    background-color: #F7F7F7;
-    border: 3px solid #737373;
-    border-radius: 7px;
-    font-family: "Nunito", monospace;
-    color: #3d3d3d;
-    font-size: 16px;
-    overflow: hidden;
-}
-.top-info input::placeholder{
-    color: #d4d4d4;
-    font-family: "Nunito", monospace;
-}
-.top-info button{
-    background-color: #E63434;
-    color: #FFFFFF;
-    font-family: "Nunito", monospace;
-    font-weight: 900;
-    border: solid #E63434 2px;
-    border-radius: 5px;
 }
