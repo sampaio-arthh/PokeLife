@@ -67,7 +67,7 @@ app.get("/pesquisarPoke", (req, res) =>{
 });
 
 app.get("/trainers", (req, res)=>{
-    db.query("SELECT nome, cidade, idade FROM treinador", (error, results) => {
+    db.query("SELECT t.id_treinador, t.nome, t.idade, t.cidade, COUNT(b.id_treinador_vencedor) AS vitorias FROM treinador t LEFT JOIN batalha b ON t.id_treinador = b.id_treinador_vencedor GROUP BY t.id_treinador, t.nome, t.idade, t.cidade;", (error, results) => {
         if(error){
             console.log("Houve um erro na busca dos treinadores \n", error);
         }
