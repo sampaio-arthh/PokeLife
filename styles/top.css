@@ -1,14 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 * {
-    box-sizing: border-box; /* Importante para controlar a largura total */
+    box-sizing: border-box;
     margin: 0;
     padding:0;
     border: 0px;
 }
 html, body {
     width: 100%;
-    overflow-x: hidden; /* Para evitar rolagem horizontal */
+    overflow-x: hidden;
 }
 body{ 
     background-color: #f4feff;
@@ -22,6 +22,7 @@ nav{
     background-color: #555454;
     padding: 10px 2vw;
     margin-bottom: 5vh;
+    align-items: center;
 }
 .nav-in{
     display: flex;
@@ -80,5 +81,20 @@ a, a:hover, a:focus, a:active {
     font-weight: 900;
     padding: 2px;
     border: solid #E63434 2px;
+    border-radius: 5px;
+}
+.video{
+    margin-top: 5vh;
+    text-align: center;
+}
+.video h3{
+    font-family: "Nunito";
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.video iframe{
+    height: 350px;
+    width: 600px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 4px;
     border-radius: 5px;
 }

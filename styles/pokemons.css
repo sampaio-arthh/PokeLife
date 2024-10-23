@@ -25,6 +25,7 @@ body{
     color: rgb(255, 0, 0);
     font-family: "Nunito",monospace;
     font-size: 22px;
+    margin-top: 10px;
 }
 .card h3{
     color: rgb(64, 64, 64);

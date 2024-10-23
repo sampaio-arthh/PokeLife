@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PokéLife - Batalhas</title>
     <link rel="stylesheet" href="top.css">
+    <link rel="stylesheet" href="battles.css">
+    <link rel="icon" type="image/x-icon" href="icon.png">
 </head>
 <body>
     <nav>
@@ -17,5 +19,53 @@
             </div>
         </div>
     </nav>
+    <div class="top-info">
+        <h1>Batalhas</h1>
+        <h2>Não há nada mais empolgante que ver seu pokémon <b>triunfar</b></h2>
+        <h2>Confira algumas batalhas que já aconteceram por aqui</h2>
+
+        <form action="/pesquisarBattles" method="get">
+            <input type="search" name="pesquisa" placeholder="Treinador (V) / Pokemon participante">
+            <button type="submit">Pesquisar</button>
+        </form>
+    </div>
+    <div class="battles">
+        <% batalhas.forEach((batalha) => { %>
+            <div class="battle">
+                <div class="b-info">
+                    <h2>Batalha <%= batalha.id_batalha %></h2>
+                    <h3>Equipe 1</h3>
+                    <ul>
+                        <li>
+                            <h4>
+                                Treinador 1: <%= batalha.treinador1 %>
+                            </h4>
+                        </li>
+                        <li>
+                            <h4 class="pokemon <%= batalha.treinador1 === batalha.treinador_vencedor ? 'vencedor' : 'perdedor' %>">Pokémon 1: <%= batalha.pokemon1 %></h4>
+                        </li>
+                    </ul>
+                    <h3>Equipe 2</h3>
+                    <ul>
+                        <li>
+                            <h4>
+                                Treinador 2: <%= batalha.treinador2 %>
+                            </h4>
+                        </li>
+                        <li>
+                            <h4 class="pokemon <%= batalha.treinador2 === batalha.treinador_vencedor ? 'vencedor' : 'perdedor' %>">Pokémon 2: <%= batalha.pokemon2 %></h4>
+                        </li>
+                    </ul>
+                    <h3>Vencedor: <%= batalha.treinador_vencedor %></h3>
+                </div>
+                <div class="img-container">
+                    <img class="<%= batalha.treinador1 === batalha.treinador_vencedor ? 'vencedor' : 'perdedor' %>" src="<%= batalha.link1 %>" alt="<%= batalha.pokemon1 %>">
+                    <h2>VS</h2>
+                    <img class="<%= batalha.treinador2 === batalha.treinador_vencedor ? 'vencedor' : 'perdedor' %>" src="<%= batalha.link2 %>" alt="<%= batalha.pokemon2 %>">
+                </div>
+            </div>
+        <% }); %>
+    </div>  
+    
 </body>
 </html>
