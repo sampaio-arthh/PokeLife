@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informações - <%=treinadores.nome%> </title>
+    <link rel="icon" type="image/x-icon" href="icon.png">
+    <link rel="stylesheet" href="top.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-in">
+            <a href="/"><h2>PokéLife</h2></a>
+            <div class="cont-nav">
+                <a href="pokemons"><h3>Pokémons</h3></a>
+                <a href="trainers"><h3>Treinadores</h3></a>
+                <a href="battles"><h3>Batalhas</h3></a>
+            </div>
+        </div>
+    </nav>
+
+    <form id="trainerForm" method="post">
+        <input type="hidden" id="id_treinador" name="id_treinador" value="<%=treinadores.id_treinador%>">
+        <input type="text" id="inputNome" name="inputNome" value="<%=treinadores.nome%>" required>
+        <input type="number" id="inputIdade" name="inputIdade" value="<%=treinadores.idade%>" required>
+        <input type="text" id="inputCidade" name="inputCidade" value="<%=treinadores.cidade%>" required>
+        
+        <button type="submit" onclick="submitForm('/editarTrainer')">Salvar</button>
+    </form>
+<script>
+function submitForm(action) {
+const form = document.getElementById('trainerForm');
+form.action = action;
+form.submit();
+}
+</script>
+</body>
+</html>

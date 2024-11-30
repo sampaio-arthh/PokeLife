@@ -31,6 +31,7 @@
     </div>
     <div class="battles">
         <% batalhas.forEach((batalha) => { %>
+            <a href="/infoBattles?id_batalha=<%= batalha.id_batalha%>" class="card-link">
             <div class="battle">
                 <div class="b-info">
                     <h2>Batalha <%= batalha.id_batalha %></h2>
@@ -64,6 +65,7 @@
                     <img class="<%= batalha.treinador2 === batalha.treinador_vencedor ? 'vencedor' : 'perdedor' %>" src="<%= batalha.link2 %>" alt="<%= batalha.pokemon2 %>">
                 </div>
             </div>
+        </a>
         <% }); %>
     </div>  
     

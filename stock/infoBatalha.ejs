@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Batalha</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="style/style.css">
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="col py-3">
+        <div class="justify-content-center">
+          <h1 class="register-title"> Batalha <%=batalha.id_batalha%> </h1>
+        </div>
+        <form id="pokemonForm" method="post">
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <input type="hidden" id="id_batalha" name="id_batalha" value="<%=batalha.id_batalha%>">
+                    <label for="inputData">Data</label>
+                    <input type="date" class="form-control" name="inputData" id="inputData" value="<%=batalha.data%>">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="inputNome">Treinador 1</label>
+                  <select id="inputTreinador1" class="form-control" name="inputTreinador1" onchange="carregarPokemon(1)"required>
+                    <% treinadores.forEach((treinador)=> { %>
+                      <option  <%= batalha.id_treinador1 === treinador.id_treinador ? 'selected' : '' %> value="<%=treinador.id_treinador%>"><%=treinador.nome%></option>
+                    <% }); %> 
+                  </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPokemon1">Pokemon 1</label>
+                    <select id="inputPokemon1" class="form-control" name="inputPokemon1"  required>
+                      <% pokemons1.forEach((pokemon)=> { %>
+                        <option  <%= batalha.id_pokemon1 === pokemon.id_pokemon ? 'selected' : '' %> value="<%=pokemon.id_pokemon%>"><%=pokemon.nome%></option>
+                      <% }); %> 
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="inputNome">Treinador 2</label>
+                <select id="inputTreinador2" class="form-control" name="inputTreinador2"  onchange="carregarPokemon(2)" required>
+                  <% treinadores.forEach((treinador)=> { %>
+                    <option  <%= batalha.id_treinador2 === treinador.id_treinador ? 'selected' : '' %> value="<%=treinador.id_treinador%>"><%=treinador.nome%></option>
+                  <% }); %> 
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                  <label for="inputPokemon2">Pokemon 2</label>
+                  <select id="inputPokemon2" class="form-control" name="inputPokemon2" required>
+                    <% pokemons2.forEach((pokemon)=> { %>
+                      <option  <%= batalha.id_pokemon2 === pokemon.id_pokemon ? 'selected' : '' %> value="<%=pokemon.id_pokemon%>"><%=pokemon.nome%></option>
+                    <% }); %> 
+                  </select>
+              </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputNome">Vencedor</label>
+              <select id="inputVencedor" class="form-control" name="inputVencedor">
+                <% treinadores.forEach((treinador)=> { %>
+                  <option  <%= batalha.id_treinador_vencedor === treinador.id_treinador ? 'selected' : '' %> value="<%=treinador.id_treinador%>"><%=treinador.nome%></option>
+                <% }); %> 
+              </select>
+            </div>
+        </div>
+            
+            <div class="form-row">
+                <div class="col-auto">
+                <button type="submit" class="btn btn-outline-success" onclick="submitForm('/editarBatalha')">Salvar</button>
+                </div>
+            </div>
+        </form>
+      </div>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+  <script>
+
+    function submitForm(action) {
+      const form = document.getElementById('pokemonForm');
+      form.action = action;
+      form.submit();
+    }
+
+    function carregarPokemon(opcao) {
+      const id_treinador = document.getElementById(`inputTreinador${opcao}`).value;
+      const campo_pokemon = document.getElementById(`inputPokemon${opcao}`);
+      //Usamos o fetch para fazer uma requisição ao servidor
+      fetch(`/treinadorPokemon?id_treinador=${id_treinador}`)
+        .then(response => response.json()) //espera a resposta e a transforma em um tipo que ele entende
+        .then(data => { //a resposta convertida para json é armazenada em data
+          campo_pokemon.innerHTML = ''; // Limpa o campo select atual 
+          data.forEach(pokemon => {
+            const option = document.createElement('option');
+            option.value = pokemon.id_pokemon;
+            option.text = pokemon.nome;
+            campo_pokemon.add(option);
+          });
+          //Já que o treinador foi modificado, vamos alterar as opções do campo vencedor
+          atualizarOpcoesVencedor()
+        })
+        //se der algum erro ele é apresentado no console
+        .catch(error => console.error('Erro ao carregar Pokémons:', error));
+    }
+
+    function atualizarOpcoesVencedor() {
+      const vencedorSelect = document.getElementById('inputVencedor');
+      const treinador1 = document.getElementById('inputTreinador1');
+      const treinador2 = document.getElementById('inputTreinador2');
+
+      // Limpa as opções de vencedor atuais
+      vencedorSelect.innerHTML = '';
+
+      // Adiciona o treinador 1 como opção, se selecionado
+      if (treinador1.value) {
+        const option1 = document.createElement('option');
+        option1.value = treinador1.value;
+        option1.text = treinador1.options[treinador1.selectedIndex].text;
+        vencedorSelect.add(option1);
+      }
+
+      // Adiciona o treinador 2 como opção, se selecionado
+      if (treinador2.value) {
+        const option2 = document.createElement('option');
+        option2.value = treinador2.value;
+        option2.text = treinador2.options[treinador2.selectedIndex].text;
+        vencedorSelect.add(option2);
+      }
+    }
+
+    // Inicializa as opções de vencedor e as opções de pokemon ao carregar a página
+    document.addEventListener('DOMContentLoaded', () => {
+      atualizarOpcoesVencedor();
+      carregarPokemon(1);
+      carregarPokemon(2);
+    });
+  </script>
+  </body>
+</html>
+

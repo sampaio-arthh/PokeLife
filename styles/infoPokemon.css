@@ -1,0 +1,20 @@
+.container{
+    background-color: #115566;
+}
+.form-int{
+    display: flex;
+    flex-wrap: wrap;
+    width: 70vw;
+    height: 40vh;
+    justify-content: space-between;
+    input {
+        height: 22px;
+        background-color: #eeeeee;
+        border: 3px solid #646464;
+        border-radius: 5px;
+    }
+    .l1{
+        display: grid;
+        margin-left: 3vw;
+    }
+}

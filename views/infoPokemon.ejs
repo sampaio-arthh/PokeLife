@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="icon.png">
+    <link rel="stylesheet" href="top.css">
+    <link rel="stylesheet" href="infoPokemon.css">
+    <title><%=pokemon.nome%></title>
+</head>
+<body>
+    <nav>
+        <div class="nav-in">
+            <a href="/"><h2>PokéLife</h2></a>
+            <div class="cont-nav">
+                <a href="pokemons"><h3>Pokémons</h3></a>
+                <a href="trainers"><h3>Treinadores</h3></a>
+                <a href="battles"><h3>Batalhas</h3></a>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <form id="pokemonForm" method="post">
+            <div class="form-int">
+                <div class="l1">
+                    <input type="hidden" id="id_pokemon" name="id_pokemon" value="<%=pokemon.id_pokemon%>">
+                    <label for="inputNome">Nome do Pokémon</label>
+                    <input type="text" id="inputNome" name="inputNome" value="<%=pokemon.nome%>" required>
+                    <label for="inputTipo">Tipo(s) do Pokémon</label>
+                    <input type="text" id="inputTipo" name= "inputTipo" value="<%=pokemon.tipo%>" required>
+                    <label for="inputNvl">Nível do Pokémon</label>
+                    <input type="number" id="inputNvl" name="inputNvl" value="<%=pokemon.nvl%>" required>
+                    <label for="inputImagemUrl">Link da imagem</label>
+                    <input type="text" id="inputImagemUrl" name="imagem_url" value="<%= pokemon.link %>" oninput="atualizarImagemPreview()"/>
+                </div>
+                <div class="l2">
+                    <img id="imagemPreview" src="<%= pokemon.link%>" style="max-width: 200px; max-height: 200px;"/>
+            
+                </div>
+            </div>
+            <button type="submit" onclick="submitForm('/editarPokemon')">Salvar</button>
+        </form>
+    </div>
+    
+<script>
+function submitForm(action) {
+const form = document.getElementById('pokemonForm');
+form.action = action;
+form.submit();
+}
+function atualizarImagemPreview() {
+const url = document.getElementById("inputImagemUrl").value;
+document.getElementById("imagemPreview").src = url;
+}
+</script>
+</body>
+</html>
