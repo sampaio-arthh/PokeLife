@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokéLife - Pokémons</title>
+    <link rel="stylesheet" href="top.css">
+    <link rel="stylesheet" href="newPokemon.css">
+    <link rel="icon" type="image/x-icon" href="icon.png">
+</head>
+<body>
+    <nav>
+        <div class="nav-in">
+            <a href="/"><h2>PokéLife</h2></a>
+            <div class="cont-nav">
+                <a href="pokemons"><h3>Pokémons</h3></a>
+                <a href="trainers"><h3>Treinadores</h3></a>
+                <a href="battles"><h3>Batalhas</h3></a>
+            </div>
+        </div>
+    </nav>
+        <form method="post" id="pokemonForm">
+            <div class="form-int">
+                <div class="container">
+                    <input type="text" placeholder="Nome do Pokemon" id="inputNome" name="inputNome" required>
+                    <input type="text" placeholder="Tipo" id="inputTipo" name="inputTipo" required>
+                    <input type="text" placeholder="Nível" id="inputNvl" name="inputNvl" required>
+                    <input type="text" placeholder="URL da imagem" id="inputUrl" name="inputUrl" oninput="atualizarImagemPreview()" required>
+                    <button type="submit" onclick="submitForm('/addPokemon')">Cadastrar</button>
+                </div>
+                <img src="icon.png" alt="" draggable="false" id="imagemPreview">
+            </div>
+        </form>
+        <script>
+            function submitForm(action) {
+            const form = document.getElementById('pokemonForm');
+            form.action = action;
+            form.submit();
+            }
+            function atualizarImagemPreview() {
+            const url = document.getElementById("inputUrl").value;
+            document.getElementById("imagemPreview").src = url;
+            }
+        </script>
+    </body>
+    </html>

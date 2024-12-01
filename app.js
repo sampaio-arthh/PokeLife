@@ -205,3 +205,21 @@ app.post('/editarBattle', (req, res) => {
         }
     });
 });
+
+app.get("/newPokemon", (req, res) => {
+    res.render("newPokemon");
+})
+
+app.post("/addPokemon", (req,res) => {
+    const nome = req.body.inputNome;
+    const tipo = req.body.inputTipo;
+    const nvl = req.body.inputNvl;
+    const link = req.body.inputUrl;
+    db.query("INSERT INTO pokemon (nome, tipo, nvl, link) values (?,?,?,?)", [nome, tipo, nvl, link], (err, results) => {
+        if(err){
+            console.log(err)
+            res.redirect("home")
+        }
+        res.redirect("pokemons")
+    })
+})

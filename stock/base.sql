@@ -1,14 +1,14 @@
 CREATE DATABASE pokemon;
 USE pokemon;
 CREATE TABLE pokemon (
-    id_pokemon INT PRIMARY KEY,
+    id_pokemon INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     tipo VARCHAR(50) NOT NULL,
    	nvl INT NOT NULL,
     link varchar(300) NOT NULL
 );
 CREATE TABLE treinador (
-    id_treinador INT PRIMARY KEY,
+    id_treinador INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(50) NOT NULL,
     idade INT NOT NULL,
     cidade VARCHAR(50) NOT NULL
@@ -21,7 +21,7 @@ CREATE TABLE treinador_pokemon (
     FOREIGN KEY (id_pokemon) REFERENCES Pokemon(id_pokemon)
 );
 CREATE TABLE batalha (
-    id_batalha INT PRIMARY KEY,
+    id_batalha INT AUTO_INCREMENT PRIMARY KEY,
     id_treinador1 INT NOT NULL,
     FOREIGN KEY (id_treinador1) REFERENCES Treinador(id_treinador),
     id_pokemon1 INT NOT NULL,

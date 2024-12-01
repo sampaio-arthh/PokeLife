@@ -1,0 +1,36 @@
+button{
+    background-color: #E63434;
+    color: #FFFFFF;
+    font-family: "Nunito", monospace;
+    font-weight: 900;
+    padding: 2px;
+    border: solid #E63434 2px;
+    border-radius: 5px;
+}
+body{
+    background-color: #646464;
+}
+input {
+    height: 22px;
+    width: 180px;
+    background-color: #eeeeee;
+    border: 3px solid #646464;
+    border-radius: 5px;
+}
+form{
+    text-align: center;
+    
+}
+.form-int{
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.container{
+    display: grid;
+    gap: 8px;
+}
+img{
+    width: 200px;
+    height: 200px;
+}
