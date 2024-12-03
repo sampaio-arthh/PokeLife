@@ -66,13 +66,14 @@ app.get("/pesquisarPoke", (req, res) =>{ //Rota de pesquisa
             res.redirect("/trainers")
         }
         else{
-            res.render("pokemons", { pokemons : results })
+            res.render("pokemons", { pokemons : results }) //Sucesso: renderize de acordo com o esquema de pokemons.ejs e passando o dict pokemons com o resultado do SELECT
         }
     })
 });
 
 app.get("/trainers", (req, res)=>{
     db.query("SELECT t.id_treinador, t.nome, t.idade, t.cidade, COUNT(b.id_treinador_vencedor) AS vitorias FROM treinador t LEFT JOIN batalha b ON t.id_treinador = b.id_treinador_vencedor GROUP BY t.id_treinador, t.nome, t.idade, t.cidade;", (error, results) => {
+    //Retornando todos os dados dos treinadores e contando as batalhas em que ele é o vencedor(nome do resultado = vitorias)
         if(error){
             console.log("Houve um erro na busca dos treinadores \n", error);
         }
