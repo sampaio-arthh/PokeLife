@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%=batalha.nome%> </title>
-    <link rel="icon" type="image/x-icon" href="icon.png">
-    <link rel="stylesheet" href="top.css">
+    <title>Pokélife - Batalha <%=batalha.id_batalha%> </title> <!-- Título no padrão do site --><!-- No conjunto batalha(que está definido só para a batalha selecionada na página anterior) use o valor de chave 'id_batalha' -->
+    <link rel="icon" type="image/x-icon" href="icon.png"> <!-- Logo da pokébola na guia -->
+    <link rel="stylesheet" href="top.css"> <!-- CSS da navbar e de algumas configurações padronizadas -->
 </head>
 <body>
     <nav>
-        <div class="nav-in">
+        <div class="nav-in"> <!-- Cabeçalho padrão do site -->
             <a href="/"><h2>PokéLife</h2></a>
             <div class="cont-nav">
                 <a href="pokemons"><h3>Pokémons</h3></a>
@@ -17,9 +17,9 @@
                 <a href="battles"><h3>Batalhas</h3></a>
             </div>
         </div>
-    </nav>
+    </nav> <!-- Fim do cabeçalho -->
 
-    <form id="battlesForm" method="post">
+    <form id="battlesForm" method="post"> <!-- Formulário de edição da batalha -->
         <input type="hidden" id="id_batalha" name="id_batalha" value="<%=batalha.id_batalha%>">
 
         <select id="selId_treinador1" name="selId_treinador1">

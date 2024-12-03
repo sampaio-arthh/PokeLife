@@ -46,3 +46,6 @@ h2:nth-last-child(){
 .add{
     margin-bottom: 5vh;
 }
+.top-info h2{
+    margin-bottom: 10px;
+}

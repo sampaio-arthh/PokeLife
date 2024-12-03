@@ -61,14 +61,12 @@ a, a:hover, a:focus, a:active {
     color: #3d3d3d;
     margin-bottom: 0;
 }
-input{
-    background-color: #F7F7F7;
-    border: 3px solid #737373;
-    border-radius: 7px;
-    font-family: "Nunito", monospace;
-    color: #3d3d3d;
-    font-size: 16px;
-    overflow: hidden;
+input {
+    height: 22px;
+    width: 180px;
+    background-color: #eeeeee;
+    border: 3px solid #646464;
+    border-radius: 5px;
 }
 .top-info input::placeholder{
     color: #d4d4d4;

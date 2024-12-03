@@ -4,20 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PokéLife - Inscrever Treinador</title>
+    <link rel="stylesheet" href="top.css">
 </head>
 <body>
-    <h2>Seja bem vindo !</h2>
-    <h3>Preenche tudo e vem aproveitar !</h3>
+    <nav>
+        <div class="nav-in">
+            <a href="/"><h2>PokéLife</h2></a>
+            <div class="cont-nav">
+                <a href="pokemons"><h3>Pokémons</h3></a>
+                <a href="trainers"><h3>Treinadores</h3></a>
+                <a href="battles"><h3>Batalhas</h3></a>
+            </div>
+        </div>
+    </nav>
+    
     <form method="post" id="pokemonForm">
         <div class="form-int">
             <div class="container">
-                <input type="text" name="inputNome" id="inputNome" required>
-                <input type="number" name="inputIdade" id="inputIdade" required>
-                <input type="text" name="inputCidade" id="inputCidade" required>
-                <button type="submit" onclick="submitForm('/addTrainer')">Enviar</button>
+                <div class="cont-int">
+                    <h2>Seja bem vindo !</h2>
+                    <h3>Preencha tudo e vem aproveitar !</h3>
+                    <input type="text" name="inputNome" id="inputNome" placeholder="Nome" required>
+                    <input type="number" name="inputIdade" id="inputIdade" placeholder="Idade" required>
+                    <input type="text" name="inputCidade" id="inputCidade" placeholder="Cidade" required>
+                    <button type="submit" onclick="submitForm('/addTrainer')">Enviar</button>
+                </div>
             </div>
         </div>
     </form>
+    <div class="extra">
+        <h2>Não esqueça de inscrever seu pokémon ! </h2>
+        <a href="/newPokemon"><button class="add">Adicione seu fofinho</button></a>
+    </div>
 </body>
 <script>
 function submitForm(action) {
@@ -26,4 +44,48 @@ form.action = action;
 form.submit();
 }
 </script>
+<style>
+    body{
+        background-color: rgb(255, 200, 127);
+    }
+    h2, h3{
+        text-align: center;
+    }
+    h2{
+        font-family: "Nunito", monospace;
+        font-size: 20px;
+        font-weight: 700;
+    }
+    .cont-int h3{
+        font-family: "Albert Sans", monospace;
+        font-size: 18px;
+        font-weight: 300;
+    }
+    .container{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        background-color: rgb(44, 135, 238);
+        padding: 20px;
+        border: 3px solid rgb(31, 106, 192);
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+        text-align: center;
+    }
+    .cont-int{
+        display: grid;
+        gap: 8px;
+    }
+    .form-int{
+        display: flex;
+        justify-content: center;
+        padding: 50px;
+    }
+    form{
+        margin-top: 20px;
+    }
+    .extra{
+        text-align: center;
+    }
+</style>
 </html>

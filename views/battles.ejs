@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PokéLife - Batalhas</title>
-    <link rel="stylesheet" href="top.css">
+    <link rel="stylesheet" href="top.css"> <!-- CSS da navbar e de algumas configurações padronizadas -->
     <link rel="stylesheet" href="battles.css">
-    <link rel="icon" type="image/x-icon" href="icon.png">
+    <link rel="icon" type="image/x-icon" href="icon.png"> <!-- Logo da pokébola na guia -->
 </head>
 <body>
-    <nav>
+    <nav> <!-- Cabeçalho padrão do site -->
         <div class="nav-in">
             <a href="/"><h2>PokéLife</h2></a>
             <div class="cont-nav">
@@ -18,55 +18,71 @@
                 <a href="battles"><h3>Batalhas</h3></a>
             </div>
         </div>
-    </nav>
+    </nav> <!-- Fim do cabeçalho -->
+
     <div class="top-info">
         <h1>Batalhas</h1>
         <h2>Não há nada mais empolgante que ver seu pokémon <b>triunfar</b></h2>
         <h2>Confira algumas batalhas que já aconteceram por aqui</h2>
 
-        <form action="/pesquisarBattles" method="get">
+        <form action="/pesquisarBattles" method="get"> <!-- Formulário cuja ação é enviar a rota '/pesquisarBattles' e recebe informações via GET-->
             <input type="search" name="pesquisa" placeholder="Treinador (V) / Pokemon participante">
             <button type="submit">Pesquisar</button>
         </form>
+
     </div>
-    <div class="battles">
-        <% batalhas.forEach((batalha) => { %>
-            <a href="/infoBattles?id_batalha=<%= batalha.id_batalha%>" class="card-link">
-            <div class="battle">
-                <div class="b-info">
-                    <h2>Batalha <%= batalha.id_batalha %></h2>
+    <div class="battles"> <!-- Classe que segura todas as batalhas -->
+        <% batalhas.forEach((batalha) => { %> <!-- Para cada batalha do conjunto 'batalhas' passado no 'res.render', para cada elemento 'batalha':  -->
+            <a href="/infoBattles?id_batalha=<%= batalha.id_batalha%>" class="card-link"> <!-- Link para página própria de edição -->
+            <div class="battle"><!-- Classe generalizada para as batalhas -->
+                <div class="b-info"> <!-- Informações da batalha -->
+                    <h2>Batalha <%= batalha.id_batalha %></h2> <!-- No elemento batalha, o valor de chave 'id.batalha' -->
+                    <!-- Divisão 1 da batalha -->
                     <h3>Equipe 1</h3>
                     <ul>
-                        <li>
+                        <li><!-- -->
                             <h4>
-                                Treinador 1: <%= batalha.treinador1 %>
+                                Treinador 1: <%= batalha.treinador1 %> <!-- No elemento batalha, o valor de chave 'treinador1' (que é um AS de 't1.nome') -->
                             </h4>
                         </li>
                         <li>
-                            <h4 class="pokemon <%= batalha.treinador1 === batalha.treinador_vencedor ? 'vencedor' : 'perdedor' %>">Pokémon 1: <%= batalha.pokemon1 %></h4>
+                            <h4 class="pokemon <%= batalha.treinador1 === batalha.treinador_vencedor ? 'vencedor' : 'perdedor' %>">Pokémon 1: <%= batalha.pokemon1 %></h4> <!-- No elemento batalha, o valor de chave 'pokemon1' (um AS de 'id_pokemon1') -->
+                            <!-- Classe pokemon {(true->vencedor | false->perdedor)} -->
+
                         </li>
                     </ul>
+
+                    <!-- Divisão 2 da batalha -->
                     <h3>Equipe 2</h3>
                     <ul>
                         <li>
                             <h4>
-                                Treinador 2: <%= batalha.treinador2 %>
+                                Treinador 2: <%= batalha.treinador2 %> <!-- No elemento batalha, o valor de chave 'treinador2' (que é um AS de 't2.nome') -->
                             </h4>
                         </li>
                         <li>
-                            <h4 class="pokemon <%= batalha.treinador2 === batalha.treinador_vencedor ? 'vencedor' : 'perdedor' %>">Pokémon 2: <%= batalha.pokemon2 %></h4>
+                            <h4 class="pokemon <%= batalha.treinador2 === batalha.treinador_vencedor ? 'vencedor' : 'perdedor' %>">Pokémon 2: <%= batalha.pokemon2 %></h4><!-- No elemento batalha, o valor de chave 'pokemon2' (um AS de 'p2.nome') -->
+                            <!-- Classe pokemon {(true->vencedor | false->perdedor)} -->
                         </li>
                     </ul>
-                    <h3>Vencedor: <%= batalha.treinador_vencedor %></h3>
+
+                    <h3>Vencedor: <%= batalha.treinador_vencedor %></h3> <!-- No elemento batalha, o valor de chave 'treinador_vencedor' (que é um AS de 'tv.nome') -->
+
                 </div>
+
                 <div class="img-container">
                     <img class="<%= batalha.treinador1 === batalha.treinador_vencedor ? 'vencedor' : 'perdedor' %>" src="<%= batalha.link1 %>" alt="<%= batalha.pokemon1 %>">
+                    <!-- Classe {(true->vencedor | false->perdedor)} -->
+                    
                     <h2>VS</h2>
+
                     <img class="<%= batalha.treinador2 === batalha.treinador_vencedor ? 'vencedor' : 'perdedor' %>" src="<%= batalha.link2 %>" alt="<%= batalha.pokemon2 %>">
+                    <!-- Classe {(true->vencedor | false->perdedor)} -->
                 </div>
+
             </div>
         </a>
-        <% }); %>
+        <% }); %> <!-- Fechando funções e passagem de parâmetros -->
     </div>  
     
 </body>

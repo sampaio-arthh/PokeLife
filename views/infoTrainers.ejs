@@ -27,12 +27,22 @@
         
         <button type="submit" onclick="submitForm('/editarTrainer')">Salvar</button>
     </form>
-    
+    <div class="caution">
+        <h2>Deseja excluir seu registro ?</h2>
+        <button onclick="confirmForm('/delTrainer')">Excluir Treinador</button>
+    </div>
 <script>
 function submitForm(action) {
 const form = document.getElementById('trainerForm');
 form.action = action;
 form.submit();
+}
+function confirmForm(action) {
+    if(window.confirm("Você tem certeza disso ? Ao apagar um treinador, você apaga TODOS os registros de que ele faz parte (Batalhas e seus pokémons)")){
+        const form = document.getElementById('trainerForm');
+        form.action = action;
+        form.submit();
+    }
 }
 </script>
 </body>

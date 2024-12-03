@@ -52,35 +52,35 @@ input::placeholder{
 }
 
 /* Remova o aninhamento e coloque as regras para nth-child diretamente */
-.battle:nth-child(odd) {
+a .battle:nth-child(odd) {
     background-color: #e9e9e9;
 }
 
-.battle:nth-child(odd) h2 {
+a .battle:nth-child(odd) h2 {
     color: rgb(255, 5, 5);
 }
 
-.battle:nth-child(odd) h3 {
+a .battle:nth-child(odd) h3 {
     color: rgb(255, 123, 0);
 }
 
-.battle:nth-child(even) {
+a .battle:nth-child(even) {
     background-color: #1d1d1d;
 }
 
-.battle:nth-child(even) h2 {
+a .battle:nth-child(even) h2 {
     color: rgb(0, 145, 255);
 }
 
-.battle:nth-child(even) h3 {
+a .battle:nth-child(even) h3 {
     color: #cc40ff;
 }
 
-.battle:nth-child(even) h4 {
+a .battle:nth-child(even) h4 {
     color: #f8f8f8;
 }
 
-.battle:nth-child(even) img {
+a .battle:nth-child(even) img {
     border: #f3f3f3 2px solid;
 }
 

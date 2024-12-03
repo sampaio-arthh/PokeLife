@@ -1,57 +1,69 @@
-//Definição bibliotecas
+//Definição bibliotecas a serem usadas
 const mysql = require("mysql2");
 const express = require("express");
 const ejs = require("ejs");
-const bodyParser = require("body-parser");
+const bodyParser = require("body-parser"); //Importa módulo bodyParser que trabalha com as requisições HTTP e o envio de dados via POST
 const { error } = require("console");
 
 const app = express();
 const port = 3000;
 app.set("view engine", "ejs"); //Definindo ejs como método de exibição
 
-app.use(bodyParser.urlencoded({ extend: true }));
+app.use(bodyParser.urlencoded({ extend: true })); //Configurando as intervenções do bodyParser
 app.set("view engine", "ejs");
 app.use(express.static("src"));
 
-//inst conex + spec
+//Instanciando a conexão com o banco de dados
 const db = mysql.createConnection({
     host: "localhost",
     database: "pokemon",
     user: "root",
     password: ""
 });
-//conex proc --> err + stdConex
+
+//Processo de conexão e retorno de erros se necessário
 db.connect((error)=>{
-    if(error){
-        console.log("Erro ao conectar com o MySQL! \n", error);
+    if(error){ //
+        console.log("Erro ao conectar com o MySQL! \n", error); //Erro de conexão no console
     }
     else{
-        console.log("Conectado ao MySQL!");
+        console.log("Conectado ao MySQL!"); //Sucesso
     }
 })
 
-//sem ejs:
-//res.send(results); //out to page
-//console.log(results); //out to console
+app.use(express.static(__dirname + '/styles')); //Autorizando acesso integral à pasta styles
 
-app.get("/", (req, res)=>{
-    res.render(__dirname + "/views/home.ejs")
+//res.send(results); //Envia para a página
+//Se houver uma página renderizada, e usar o res.send(results) você envia o arquivo como um download
+
+//console.log(results); //Envia para o console
+
+app.get("/", (req, res)=>{ //Rota da home
+    res.render(__dirname + "/views/home.ejs") //Entre na pasta e renderize esse arquivo
 })
-app.get("/pokemons", (req, res) => {
+
+app.get("/pokemons", (req, res) => { //Ao receber a rota /pokemons:
+    //Realize essa busca Nome, id, nível e link do pokemon com o nome do seu treinador
     db.query("SELECT p.nome, p.id_pokemon, nvl, link, t.nome as Tnome FROM Pokemon p INNER JOIN treinador_pokemon tp ON tp.id_pokemon = p.id_pokemon INNER JOIN treinador t ON t.id_treinador = tp.id_treinador ORDER BY id_pokemon", (error, results) => {
-        if (error) {
-            console.log("Ocorreu um erro ao buscar todos os pokemons \n", error);
-        } else {
-            res.render("pokemons", { pokemons: results }); // Passando os dados para a view
+        if (error) { //Se algo der errado
+            console.log("Ocorreu um erro ao buscar todos os pokemons \n", error); //Avise no console
+            res.redirect("/"); //Volte para a home
+            window.alert("Algo deu errado"); //Avise na tela para o usuário
+        } else { //Se ocorreu naturalmente
+            res.render("pokemons", { pokemons: results }); // Passando os dados para a view no dicionário pokemons
+            //Estrutura dict pokemons => {p.nome : valor(p.nome), p.id_pokemon : valor(p.id_pokemon), nvl : valor(nvl), link : valor(link), t.id_treinador : valor(t.id_treinador)}
         }
     });
 });
 
-app.get("/pesquisarPoke", (req, res) =>{
-    const pesquisa = req.query.pesquisa;
+app.get("/pesquisarPoke", (req, res) =>{ //Rota de pesquisa
+    const pesquisa = req.query.pesquisa; //'pesquisa' recebe o valor do <input name='pesquisa'>
     db.query("SELECT p.nome, nvl, link, t.nome as Tnome FROM Pokemon p INNER JOIN treinador_pokemon tp ON tp.id_pokemon = p.id_pokemon INNER JOIN treinador t ON t.id_treinador = tp.id_treinador WHERE p.nome LIKE ?", [`%${pesquisa}%`], (error, results) => {
+    //Busca por pokémon com nome semelhante ao texto digitado
+    //[`%${pesquisa}%`] --> '%': qualquer sequência de caracteres (na frente e atrás) | '${}' --> representa que está falando de uma variável dentro do ` `
         if(error){
-            console.log("Houve um erro ao realizar a pesquisa \n", error);
+            console.log("Houve um erro ao realizar a pesquisa \n", error); //
+            res.redirect("/trainers")
         }
         else{
             res.render("pokemons", { pokemons : results })
@@ -72,7 +84,7 @@ app.get("/trainers", (req, res)=>{
 
 app.get("/pesquisarTrainer", (req, res) =>{
     const pesquisa = req.query.pesquisa;
-    db.query("SELECT t.id_treinador, t.nome, t.idade, t.cidade, COUNT(b.id_treinador_vencedor) AS vitorias FROM treinador t LEFT JOIN batalha b ON t.id_treinador = b.id_treinador_vencedor WHERE t.nome = ? OR t.cidade = ? OR CAST(idade AS CHAR) = ? GROUP BY t.id_treinador, t.nome, t.idade, t.cidade", [`%${pesquisa}%`, pesquisa, pesquisa], (error, results) => {
+    db.query("SELECT t.id_treinador, t.nome, t.idade, t.cidade, COUNT(b.id_treinador_vencedor) AS vitorias FROM treinador t LEFT JOIN batalha b ON t.id_treinador = b.id_treinador_vencedor WHERE t.nome LIKE ? OR t.cidade = ? OR CAST(idade AS CHAR) = ? GROUP BY t.id_treinador, t.nome, t.idade, t.cidade", [`%${pesquisa}%`, pesquisa, pesquisa], (error, results) => {
         if(error){
             console.log("Houve um erro ao realizar a pesquisa\n", error);
         }
@@ -97,7 +109,7 @@ app.get("/pesquisarBattles", (req, res) => {
     const pesquisa = req.query.pesquisa;
 
     db.query(`
-    SELECT b.id_batalha, t1.nome AS treinador1, p1.nome AS pokemon1, t2.nome AS treinador2, p2.nome AS pokemon2, tv.nome AS treinador_vencedor, p1.link AS link1, p2.link AS link2 FROM batalha b JOIN treinador t1 ON b.id_treinador1 = t1.id_treinador JOIN pokemon p1 ON b.id_pokemon1 = p1.id_pokemon JOIN treinador t2 ON b.id_treinador2 = t2.id_treinador JOIN pokemon p2 ON b.id_pokemon2 = p2.id_pokemon JOIN treinador tv ON b.id_treinador_vencedor = tv.id_treinador WHERE tv.nome LIKE ? OR p1.nome = ? OR p2.nome = ?`, [`%${pesquisa}%`, pesquisa, pesquisa], (error, results) => {
+    SELECT b.id_batalha, t1.nome AS treinador1, p1.nome AS pokemon1, t2.nome AS treinador2, p2.nome AS pokemon2, tv.nome AS treinador_vencedor, p1.link AS link1, p2.link AS link2 FROM batalha b JOIN treinador t1 ON b.id_treinador1 = t1.id_treinador JOIN pokemon p1 ON b.id_pokemon1 = p1.id_pokemon JOIN treinador t2 ON b.id_treinador2 = t2.id_treinador JOIN pokemon p2 ON b.id_pokemon2 = p2.id_pokemon JOIN treinador tv ON b.id_treinador_vencedor = tv.id_treinador WHERE tv.nome LIKE ? OR p1.nome LIKE ? OR p2.nome LIKE ?`, [`%${pesquisa}%`, `%${pesquisa}%`, `%${pesquisa}%`], (error, results) => {
         if (error) {
             console.log("Houve um erro ao realizar a pesquisa\n", error);
             return res.status(500).send("Erro na consulta");
@@ -146,7 +158,7 @@ app.get("/infoBattles", (req, res) => {
 });
 });
 
-app.use(express.static(__dirname + '/styles'));
+
 
 app.listen(port, ()=>{
     console.log("Servidor iniciado");
@@ -287,3 +299,70 @@ app.post("/delPokemon", (req, res) => {
         })
     })
 })
+
+app.post("/delTrainer", (req, res) => {
+    const id_treinador = req.body.id_treinador; //Recebendo o id_treinador pelo input type="hidden" da página
+
+    // Primeiro tem que excluir as batalhas que o treinador participa
+    db.query("DELETE FROM batalha WHERE id_treinador1 = ? OR id_treinador2 = ?", [id_treinador, id_treinador], (err, resultsDelBat) => {
+        if (err) {
+            console.log(err);
+            return res.redirect("/");
+        }
+
+        // Depois buscar os Pokémons do treinador
+        db.query("SELECT id_pokemon FROM treinador_pokemon WHERE id_treinador = ?", [id_treinador], (err, resultsSelTP) => {
+            if (err) {
+                console.log(err);
+                return res.redirect("/");
+            }
+
+            //A relação treinador_pokemon tem que cair antes do pokémon, pois tem como chaves primárias id_treinador e id_pokemon
+            db.query("DELETE FROM treinador_pokemon WHERE id_treinador = ?", [id_treinador], (err, resultsDelTP) => {
+                if (err) {
+                    console.log(err);
+                    return res.redirect("/");
+                }
+            })
+
+            // Definindo index da primeira exclusão
+            let index = 0;
+
+            // Função para excluir os Pokémons de forma sequencial (Função de seta (vale lembrar que por não ser hoisted, ela tem que ser definida 1o))
+            const deletePokemon = () => { //Definindo função deletePokemon()
+                if (index < resultsSelTP.length) { //Se o index for menor que o tamanho da lista(ou seja, até o valor de {(resultsSelTP.length-1)})
+                    const id_pokemon = resultsSelTP[index].id_pokemon; // id_pokemon recebe o id_pokemon do resultado (index+1) do SELECT
+                    
+                    // Exclui o pokémon do id_pokemon sendo usado
+                    db.query("DELETE FROM pokemon WHERE id_pokemon = ?", [id_pokemon], (err, resultsDelTP) => {
+                        if (err) {
+                            console.log(err);
+                            return res.redirect("/");
+                        }
+
+                        // Usando recursão para percorrer todos os pokémon
+                        index++;
+                        deletePokemon(); //Chamando novamente a função
+                    });
+                } else { //Se o index já for maior que o tamanho da lista
+
+                    // Depois de excluir todos os pokémons, exclui o relacionamento e o treinador
+                    
+
+                        db.query("DELETE FROM treinador WHERE id_treinador = ?", [id_treinador], (err, resultsDelTrainer) => {
+                            if (err) {
+                                console.log(err);
+                                return res.redirect("/");
+                            }
+
+                            // Se tudo deu certo, redireciona para a lista de treinadores
+                            res.redirect("/trainers");
+                        });
+                }
+            };
+
+            // Inicia a exclusão do primeiro Pokémon
+            deletePokemon();
+        });
+    });
+});
