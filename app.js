@@ -38,7 +38,7 @@ app.get("/", (req, res)=>{
     res.render(__dirname + "/views/home.ejs")
 })
 app.get("/pokemons", (req, res) => {
-    db.query("SELECT p.nome, p.id_pokemon, nvl, link, t.nome as Tnome FROM Pokemon p INNER JOIN treinador_pokemon tp ON tp.id_pokemon = p.id_pokemon INNER JOIN treinador t ON t.id_treinador = tp.id_treinador", (error, results) => {
+    db.query("SELECT p.nome, p.id_pokemon, nvl, link, t.nome as Tnome FROM Pokemon p INNER JOIN treinador_pokemon tp ON tp.id_pokemon = p.id_pokemon INNER JOIN treinador t ON t.id_treinador = tp.id_treinador ORDER BY id_pokemon", (error, results) => {
         if (error) {
             console.log("Ocorreu um erro ao buscar todos os pokemons \n", error);
         } else {
@@ -110,7 +110,7 @@ app.get("/pesquisarBattles", (req, res) => {
 app.get("/infoPokemon", (req, res)=>{
     const id_pokemon = req.query.id_pokemon;
     db.query("SELECT * FROM Pokemon WHERE id_pokemon = ?", [id_pokemon], (error, results) => {
-      res.render("infoPokemon", { pokemon: results[0] });
+        res.render("infoPokemon", { pokemon: results[0]});
     });
 });
 
@@ -175,7 +175,7 @@ app.post('/editarTrainer', (req, res) => {
     const nome = req.body.inputNome;
     const idade = req.body.inputIdade;
     const cidade = req.body.inputCidade;
-    db.query("UPDATE treinadores SET nome = ?, idade = ?, cidade = ? WHERE id_treinador = ?", [nome, idade, cidade, id_treinador], (err, results) => {
+    db.query("UPDATE treinador SET nome = ?, idade = ?, cidade = ? WHERE id_treinador = ?", [nome, idade, cidade, id_treinador], (err, results) => {
         if (err) {
             console.log('Erro ao atualizar o cadastro do treinador:', err);
             return res.send('Erro ao atualizar o cadastro do treinador');
@@ -207,19 +207,83 @@ app.post('/editarBattle', (req, res) => {
 });
 
 app.get("/newPokemon", (req, res) => {
-    res.render("newPokemon");
+    db.query("SELECT id_treinador, nome FROM treinador", (err, resultsTreinadores) =>{
+        res.render("newPokemon", {treinadores : resultsTreinadores});
+    })
 })
-
-app.post("/addPokemon", (req,res) => {
+app.get("/newTrainer", (req, res) => {
+    res.render("newTrainer");
+})
+app.post("/addPokemon", (req, res) => {
     const nome = req.body.inputNome;
     const tipo = req.body.inputTipo;
+    const id_treinador = req.body.selId_treinador;
     const nvl = req.body.inputNvl;
     const link = req.body.inputUrl;
+
+    // Primeira consulta: Inserção do Pokémon
     db.query("INSERT INTO pokemon (nome, tipo, nvl, link) values (?,?,?,?)", [nome, tipo, nvl, link], (err, results) => {
-        if(err){
-            console.log(err)
-            res.redirect("home")
+        if (err) {
+            console.log(err);
+            return res.redirect("/");
         }
-        res.redirect("pokemons")
+
+        // Segunda consulta: Obter o id_pokemon do último Pokémon inserido
+        db.query("SELECT id_pokemon FROM pokemon WHERE id_pokemon = (SELECT max(id_pokemon) FROM pokemon);", (err, results) => {
+            if (err) {
+                console.log(err);
+                return res.redirect("/");
+            }
+
+            // O id_pokemon está em results[0].id_pokemon
+            const id_pokemon = results[0].id_pokemon;
+
+            // Terceira consulta: Inserir na tabela treinador_pokemon
+            db.query("INSERT INTO treinador_pokemon (id_treinador, id_pokemon) values (?, ?)", [id_treinador, id_pokemon], (err, results) => {
+                if (err) {
+                    console.log(err);
+                    return res.redirect("/");
+                }
+
+                // Enviar a resposta para o cliente depois de todas as consultas serem concluídas
+                res.redirect("pokemons");
+            });
+        });
+    });
+});
+
+app.post("/addTrainer", (req, res) =>{
+    const nome = req.body.inputNome;
+    const idade = req.body.inputIdade;
+    const cidade = req.body.inputCidade;
+    db.query("INSERT INTO treinador (nome, idade, cidade) values (?,?,?)", [nome, idade, cidade], (err, results) => {
+        if(err){
+            console.log(err);
+            res.redirect("/");
+        }
+        res.redirect("/trainers")
+    })
+})
+
+app.post("/delPokemon", (req, res) => {
+    const id_pokemon = req.body.id_pokemon;
+    db.query("DELETE FROM batalha WHERE id_pokemon1 = ? OR id_pokemon2 = ?", [id_pokemon, id_pokemon], (err, results) =>{
+        if(err){
+            console.log(err);
+            res.redirect("/");
+        }
+        db.query("DELETE FROM treinador_pokemon WHERE id_pokemon = ?", [id_pokemon], (err, results) =>{
+            if(err){
+                console.log(err);
+                res.redirect("/");
+            }
+            db.query("DELETE FROM pokemon WHERE id_pokemon = ?", [id_pokemon], (err, results) =>{
+                if(err){
+                    console.log(err);
+                    res.redirect("/")
+                }
+                res.redirect("/pokemons")
+            })
+        })
     })
 })

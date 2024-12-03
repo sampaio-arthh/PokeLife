@@ -1,8 +1,10 @@
 body{
-  background-color: #f2f2f2;
+  background-color: #f4feff;
+  height: auto;
 }
 .trainer-section{
   display: flex;
+  width: 100vw;
   flex-wrap: wrap;
   margin-top: 5vh;
 }
@@ -25,11 +27,26 @@ body{
 .tr-info{
   margin-left: 3vw;
 }
-.treinador:nth-child(odd) {
+.trainer-section a:nth-child(odd) {
   background-color: #3d3d3d; /* testar e trocar */
   color: #b2b2b2  ;
 }
-.treinador:nth-child(even) {
+
+.trainer-section a:nth-child(even) {
   background-color: #b2b2b2; /* testar e trocar */
   color: #3d3d3d;
+}
+.top-info h2{
+  margin-top: 10px;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+h3{
+  margin: 0;
+  font-family: "Nunito", monospace;
+  font-size: 18px;
+  font-weight: 300;
+}
+.add{
+  margin: 10px 0;
 }

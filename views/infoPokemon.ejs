@@ -32,14 +32,16 @@
                     <input type="number" id="inputNvl" name="inputNvl" value="<%=pokemon.nvl%>" required>
                     <label for="inputImagemUrl">Link da imagem</label>
                     <input type="text" id="inputImagemUrl" name="imagem_url" value="<%= pokemon.link %>" oninput="atualizarImagemPreview()"/>
+                    <button type="submit" onclick="submitForm('/editarPokemon')">Salvar</button>
                 </div>
                 <div class="l2">
                     <img id="imagemPreview" src="<%= pokemon.link%>" style="max-width: 200px; max-height: 200px;"/>
-            
                 </div>
             </div>
-            <button type="submit" onclick="submitForm('/editarPokemon')">Salvar</button>
         </form>
+        <div class="caution">
+            <button onclick="confirmForm('/delPokemon')">Excluir Pokémon</button>
+        </div>
     </div>
     
 <script>
@@ -47,6 +49,13 @@ function submitForm(action) {
 const form = document.getElementById('pokemonForm');
 form.action = action;
 form.submit();
+}
+function confirmForm(action) {
+    if(window.confirm("Você tem certeza disso ? Ao apagar um pokemon, você apaga TODOS os registros de que ele faz parte")){
+        const form = document.getElementById('pokemonForm');
+        form.action = action;
+        form.submit();
+    }
 }
 function atualizarImagemPreview() {
 const url = document.getElementById("inputImagemUrl").value;

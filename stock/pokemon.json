@@ -1,0 +1,74 @@
+[
+{"type":"header","version":"5.2.1","comment":"Export to JSON plugin for PHPMyAdmin"},
+{"type":"database","name":"pokemon"},
+{"type":"table","name":"batalha","database":"pokemon","data":
+[
+{"id_batalha":"1","id_treinador1":"1","id_pokemon1":"1","id_treinador2":"2","id_pokemon2":"3","id_treinador_vencedor":"1","data":"2024-09-01"},
+{"id_batalha":"2","id_treinador1":"3","id_pokemon1":"4","id_treinador2":"1","id_pokemon2":"2","id_treinador_vencedor":"3","data":"2024-09-02"},
+{"id_batalha":"3","id_treinador1":"5","id_pokemon1":"11","id_treinador2":"2","id_pokemon2":"3","id_treinador_vencedor":"2","data":"2024-09-03"},
+{"id_batalha":"4","id_treinador1":"1","id_pokemon1":"1","id_treinador2":"4","id_pokemon2":"6","id_treinador_vencedor":"4","data":"2024-09-11"}
+]
+}
+,{"type":"table","name":"pokemon","database":"pokemon","data":
+[
+{"id_pokemon":"1","nome":"Pikachu","tipo":"elétrico","nvl":"10","link":"https:\/\/www.pokemon.com\/static-assets\/content-assets\/cms2\/img\/pokedex\/full\/025.png"},
+{"id_pokemon":"2","nome":"Charmander","tipo":"fogo","nvl":"8","link":"https:\/\/www.pokemon.com\/static-assets\/content-assets\/cms2\/img\/pokedex\/full\/004.png"},
+{"id_pokemon":"3","nome":"Bulbasaur","tipo":"grama\/veneno","nvl":"11","link":"https:\/\/www.pokemon.com\/static-assets\/content-assets\/cms2\/img\/pokedex\/full\/001.png"},
+{"id_pokemon":"4","nome":"Squirtle","tipo":"água","nvl":"9","link":"https:\/\/www.pokemon.com\/static-assets\/content-assets\/cms2\/img\/pokedex\/full\/007.png"},
+{"id_pokemon":"5","nome":"Arceus","tipo":"normal","nvl":"100","link":"https:\/\/www.pokemon.com\/static-assets\/content-assets\/cms2\/img\/pokedex\/full\/493.png"},
+{"id_pokemon":"6","nome":"Rayquaza","tipo":"dragão\/voador","nvl":"100","link":"https:\/\/www.pokemon.com\/static-assets\/content-assets\/cms2\/img\/pokedex\/full\/384.png"},
+{"id_pokemon":"7","nome":"Darkrai","tipo":"sombrio","nvl":"100","link":"https:\/\/www.pokemon.com\/static-assets\/content-assets\/cms2\/img\/pokedex\/full\/491.png"},
+{"id_pokemon":"8","nome":"Charizard","tipo":"fogo\/voador","nvl":"100","link":"https:\/\/www.pokemon.com\/static-assets\/content-assets\/cms2\/img\/pokedex\/full\/006.png"},
+{"id_pokemon":"9","nome":"Golurk","tipo":"fantasma\/terra","nvl":"100","link":"https:\/\/www.pokemon.com\/static-assets\/content-assets\/cms2\/img\/pokedex\/full\/623.png"},
+{"id_pokemon":"10","nome":"Mewtwo","tipo":"psíquico","nvl":"100","link":"https:\/\/www.pokemon.com\/static-assets\/content-assets\/cms2\/img\/pokedex\/full\/150.png"},
+{"id_pokemon":"11","nome":"Jigglypuff","tipo":"fada","nvl":"7","link":"https:\/\/www.pokemon.com\/static-assets\/content-assets\/cms2\/img\/pokedex\/full\/039.png"},
+{"id_pokemon":"21","nome":"Sprigatito","tipo":"Grama","nvl":"14","link":"https:\/\/www.pokemon.com\/static-assets\/content-assets\/cms2\/img\/pokedex\/full\/906.png"},
+{"id_pokemon":"23","nome":"Zoroark","tipo":"Escuro","nvl":"52","link":"https:\/\/www.pokemon.com\/static-assets\/content-assets\/cms2\/img\/pokedex\/full\/571.png"},
+{"id_pokemon":"24","nome":"Snom","tipo":"Gelo","nvl":"18","link":"https:\/\/www.pokemon.com\/static-assets\/content-assets\/cms2\/img\/pokedex\/full\/872.png"},
+{"id_pokemon":"25","nome":"Porygon","tipo":"Normal","nvl":"29","link":"https:\/\/www.pokemon.com\/static-assets\/content-assets\/cms2\/img\/pokedex\/full\/137.png"},
+{"id_pokemon":"26","nome":"Charizard","tipo":"Fogo\/Voador","nvl":"71","link":"https:\/\/www.pokemon.com\/static-assets\/content-assets\/cms2\/img\/pokedex\/full\/006.png"},
+{"id_pokemon":"27","nome":"Umbreon","tipo":"Escuro","nvl":"100","link":"https:\/\/www.pokemon.com\/static-assets\/content-assets\/cms2\/img\/pokedex\/full\/197.png"},
+{"id_pokemon":"28","nome":"Joltik","tipo":"Elétrico\/Inseto","nvl":"17","link":"https:\/\/www.pokemon.com\/static-assets\/content-assets\/cms2\/img\/pokedex\/full\/595.png"},
+{"id_pokemon":"30","nome":"Vegetti","tipo":"Vasco","nvl":"99","link":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSsJb0wC9ubM74nvqP7d6LCDLRvRK8CAkn-vw&s"}
+]
+}
+,{"type":"table","name":"treinador","database":"pokemon","data":
+[
+{"id_treinador":"1","nome":"Ash","idade":"10","cidade":"Kanto"},
+{"id_treinador":"2","nome":"Misty","idade":"12","cidade":"Cerulean"},
+{"id_treinador":"3","nome":"Brock","idade":"15","cidade":"Pewter"},
+{"id_treinador":"4","nome":"Arthur","idade":"17","cidade":"Macaé"},
+{"id_treinador":"5","nome":"Gary","idade":"11","cidade":"Pallet"},
+{"id_treinador":"6","nome":"Mari","idade":"19","cidade":"Rio de Janeiro"},
+{"id_treinador":"7","nome":"Nayara","idade":"18","cidade":"Rio de Janeiro"},
+{"id_treinador":"8","nome":"Henrique","idade":"18","cidade":"Rio de Janeiro"},
+{"id_treinador":"9","nome":"Sofia","idade":"17","cidade":"Rio de Janeiro"},
+{"id_treinador":"10","nome":"Renan","idade":"19","cidade":"Rio de Janeiro"},
+{"id_treinador":"11","nome":"Alline","idade":"19","cidade":"Rio de Janeiro"},
+{"id_treinador":"12","nome":"Juliana","idade":"18","cidade":"Leopoldina"},
+{"id_treinador":"13","nome":"Rafael Melo","idade":"17","cidade":"Rio de Janeiro"}
+]
+}
+,{"type":"table","name":"treinador_pokemon","database":"pokemon","data":
+[
+{"id_pokemon":"1","id_treinador":"1"},
+{"id_pokemon":"2","id_treinador":"1"},
+{"id_pokemon":"3","id_treinador":"2"},
+{"id_pokemon":"4","id_treinador":"3"},
+{"id_pokemon":"5","id_treinador":"4"},
+{"id_pokemon":"6","id_treinador":"4"},
+{"id_pokemon":"7","id_treinador":"4"},
+{"id_pokemon":"8","id_treinador":"4"},
+{"id_pokemon":"9","id_treinador":"4"},
+{"id_pokemon":"10","id_treinador":"4"},
+{"id_pokemon":"11","id_treinador":"5"},
+{"id_pokemon":"21","id_treinador":"6"},
+{"id_pokemon":"23","id_treinador":"13"},
+{"id_pokemon":"24","id_treinador":"7"},
+{"id_pokemon":"25","id_treinador":"8"},
+{"id_pokemon":"26","id_treinador":"8"},
+{"id_pokemon":"27","id_treinador":"6"},
+{"id_pokemon":"28","id_treinador":"7"}
+]
+}
+]

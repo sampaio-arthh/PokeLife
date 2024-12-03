@@ -22,6 +22,8 @@
     <div class="top-info">
         <h1>Conheça nossos membros !</h1>
         <h2>Essa é a turma da pesada</h2>
+        <h3>Ainda não faz parte da galera ?</h3>
+        <a href="/newTrainer"><button class="add">Inscrever-se</button></a>
         <form action="/pesquisarTrainer" method="get">
             <input type="search" name="pesquisa" placeholder="Treinador/Cidade/Idade">
             <button type="submit">Pesquisar</button>
@@ -30,7 +32,7 @@
     
     <div class="trainer-section">
         <% treinadores.forEach((treinador) => { %>
-            <a href="/infoTrainers?id_treinador=<%= treinador.id_treinador%>" class="card-link">
+        <a href="/infoTrainers?id_treinador=<%= treinador.id_treinador%>" class="card-link">
         <div class="treinador">
             <div class="tr-info">
                 <h3>Nome: <%= treinador.nome %></h3>
