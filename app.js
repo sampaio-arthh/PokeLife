@@ -62,7 +62,7 @@ app.get("/pesquisarPoke", (req, res) =>{ //Rota de pesquisa
     //[`%${pesquisa}%`] --> '%': qualquer sequência de caracteres (na frente e atrás) | '${}' --> representa que está falando de uma variável dentro do ` `
         if(error){
             console.log("Houve um erro ao realizar a pesquisa \n", error); //
-            res.redirect("/trainers")
+            res.redirect("/pokemons")
         }
         else{
             res.render("pokemons", { pokemons : results }) //Sucesso: renderize de acordo com o esquema de pokemons.ejs e passando o dict pokemons com o resultado do SELECT
