@@ -20,15 +20,19 @@
         </div>
     </nav> <!-- Fim do cabeçalho -->
 
-    <div class="top-info">
+    <div class="top-info"> <!-- Div de apresentação -->
         <h1>Batalhas</h1>
         <h2>Não há nada mais empolgante que ver seu pokémon <b>triunfar</b></h2>
         <h2>Confira algumas batalhas que já aconteceram por aqui</h2>
 
         <form action="/pesquisarBattles" method="get"> <!-- Formulário cuja ação é enviar a rota '/pesquisarBattles' e recebe informações via GET-->
             <input type="search" name="pesquisa" placeholder="Treinador (V) / Pokemon participante">
-            <button type="submit">Pesquisar</button>
+            <button type="submit" class="t3">Pesquisar</button>
         </form>
+        <div class="addDiv">
+            <h2>Se você ainda não publicou a sua, faça agora</h2>
+            <a href="/newBattle"><button>Registrar Batalha</button></a>
+        </div>
 
     </div>
     <div class="battles"> <!-- Classe que segura todas as batalhas -->
@@ -86,4 +90,12 @@
     </div>  
     
 </body>
+<style>
+    form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 6px;
+    }
+</style>
 </html>

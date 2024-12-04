@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PokéLife - Inscrever Treinador</title>
-    <link rel="stylesheet" href="top.css">
+    <link rel="stylesheet" href="top.css"> <!-- CSS da navbar e de algumas configurações padronizadas -->
+    <link rel="icon" type="image/x-icon" href="icon.png"> <!-- Logo da pokébola na guia -->
 </head>
 <body>
     <nav>
-        <div class="nav-in">
+        <div class="nav-in"> <!-- Cabeçalho padrão do site -->
             <a href="/"><h2>PokéLife</h2></a>
             <div class="cont-nav">
                 <a href="pokemons"><h3>Pokémons</h3></a>
@@ -16,26 +17,27 @@
                 <a href="battles"><h3>Batalhas</h3></a>
             </div>
         </div>
-    </nav>
+    </nav> <!-- Fim do cabeçalho -->
     
-    <form method="post" id="pokemonForm">
-        <div class="form-int">
-            <div class="container">
-                <div class="cont-int">
-                    <h2>Seja bem vindo !</h2>
-                    <h3>Preencha tudo e vem aproveitar !</h3>
-                    <input type="text" name="inputNome" id="inputNome" placeholder="Nome" required>
-                    <input type="number" name="inputIdade" id="inputIdade" placeholder="Idade" required>
-                    <input type="text" name="inputCidade" id="inputCidade" placeholder="Cidade" required>
-                    <button type="submit" onclick="submitForm('/addTrainer')">Enviar</button>
-                </div>
+    <form method="post" id="pokemonForm"> <!-- Formulário de atualização -->
+        <div class="form-int"> <!-- Div organizadora de conteúdo -->
+            <div class="l1"> <!-- Lado 1 -->
+                <h2>Seja bem vindo !</h2>
+                <h3>Preencha tudo e vem aproveitar !</h3>
+                <input type="text" name="inputNome" id="inputNome" placeholder="Nome" required>
+                <input type="number" name="inputIdade" id="inputIdade" placeholder="Idade" required>
+                <input type="text" name="inputCidade" id="inputCidade" placeholder="Cidade" required>
+                <button type="submit" onclick="submitForm('/addTrainer')">Enviar</button>
             </div>
         </div>
     </form>
-    <div class="extra">
-        <h2>Não esqueça de inscrever seu pokémon ! </h2>
-        <a href="/newPokemon"><button class="add">Adicione seu fofinho</button></a>
+    <div class="caution"> <!-- Usando modelo da div de exclusão -->
+        <div class="cont">
+            <h2>Não esqueça de inscrever seu pokémon ! </h2>
+            <a href="/newPokemon"><button class="add">Adicione seu fofinho</button></a>
+        </div>
     </div>
+
 </body>
 <script>
 function submitForm(action) {
@@ -44,9 +46,20 @@ form.action = action;
 form.submit();
 }
 </script>
+
 <style>
-    body{
-        background-color: rgb(255, 200, 127);
+    form{
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        margin: 2.5vh 0;
+    }
+    .form-int{
+        width: 20vw;
+        height: 40vh;
+        background-color: rgb(51, 146, 255);
+        border-radius: 5px;
+        box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
     }
     h2, h3{
         text-align: center;
@@ -56,36 +69,21 @@ form.submit();
         font-size: 20px;
         font-weight: 700;
     }
-    .cont-int h3{
+    .l1 h3{
         font-family: "Albert Sans", monospace;
         font-size: 18px;
         font-weight: 300;
     }
-    .container{
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        background-color: rgb(44, 135, 238);
-        padding: 20px;
-        border: 3px solid rgb(31, 106, 192);
-        border-radius: 5px;
-        box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
-        text-align: center;
+    input {
+        margin: 0 auto;
     }
-    .cont-int{
-        display: grid;
-        gap: 8px;
+    .l1 button {
+        width: 100px;
+        margin: 0 auto;
+        margin-top: 10px;
     }
-    .form-int{
-        display: flex;
-        justify-content: center;
-        padding: 50px;
-    }
-    form{
-        margin-top: 20px;
-    }
-    .extra{
-        text-align: center;
+    .cont{
+        background-color: rgb(255, 150, 12);
     }
 </style>
 </html>

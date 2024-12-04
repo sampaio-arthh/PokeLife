@@ -4,14 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PokéLife - Pokémons</title>
-    
-    <link rel="stylesheet" href="top.css">
-    <link rel="stylesheet" href="pokemons.css">
-    <link rel="icon" type="image/x-icon" href="icon.png">
+    <link rel="stylesheet" href="top.css"> <!-- CSS da navbar e de algumas configurações padronizadas -->
+    <link rel="icon" type="image/x-icon" href="icon.png"> <!-- Logo da pokébola na guia -->
 </head>
 <body>
     <nav>
-        <div class="nav-in">
+        <div class="nav-in"> <!-- Cabeçalho padrão do site -->
             <a href="/"><h2>PokéLife</h2></a>
             <div class="cont-nav">
                 <a href="pokemons"><h3>Pokémons</h3></a>
@@ -19,31 +17,88 @@
                 <a href="battles"><h3>Batalhas</h3></a>
             </div>
         </div>
-    </nav>
-    <div class="top-info">
+    </nav><!-- Fim do cabeçalho -->
+
+    <div class="top-info"> <!-- Div de apresentação -->
         <h1>Conheça os fofos</h1>
         <h2>Que fazem parte da nossa comunidade</h2>
-        <h2>Seu pokémon ainda não está aqui ?</h2>
-        <a href="/newPokemon"><button class="add">Adicione seu fofinho</button></a>
-        <form action="/pesquisarPoke" method="get">
-            <input type="search" name="pesquisa" placeholder="Pokémon">
-            <button type="submit">Pesquisar</button>
+
+        <div class="addDiv"> <!-- Div responsável por guardar elementos relacionados a inserir novos registros-->
+            <h2>Seu pokémon ainda não está aqui ?</h2>
+            <a href="/newPokemon"><button class="add">Adicione seu fofinho</button></a>
+        </div>
+
+        <form action="/pesquisarPoke" method="get"> <!-- Seção de pesquisa -->
+                <input type="search" name="pesquisa" placeholder="Pokémon"> <!-- input que passa o valor digitado -->
+                <button type="submit" class="t3">Pesquisar</button> <!-- Envia dados -->
         </form>
     </div>
 
-    <div class="container">
-        <% pokemons.forEach((pokemon)=>{ %> 
-        <a href="/infoPokemon?id_pokemon=<%= pokemon.id_pokemon%>" class="card-link">
-            <div class="card">
-                <h2><b><%= pokemon.nome %></b></h2>
-                
-                <img src="<%= pokemon.link %>" alt="<%= pokemon.nome %>" class="imgPoke">
-    
-                <h3>Nvl: <%=pokemon.nvl %></h3>
-                <h3>Treinador: <%=pokemon.Tnome %></h3>
+    <div class="listaPokemons"> <!-- Div que contém todos os cards -->
+        <% pokemons.forEach((pokemon)=>{ %> <!-- Para cada elemento 'pokemon' do dict -->
+        <a href="/infoPokemon?id_pokemon=<%= pokemon.id_pokemon%>" class="card-link"> <!-- Link direto para a página de info individual através do GET-->
+            <div class="card"> <!-- Card generalizado para cada registro -->
+                <h2><b><%= pokemon.nome %></b></h2> <!-- Exibe o nome do pokémon -->
+                <img src="<%= pokemon.link %>" alt="<%= pokemon.nome %>" class="imgPoke"> <!-- Exibe uma imagem do pokémon -->
+                <h3>Nvl: <%=pokemon.nvl %></h3> <!-- Exibe o nível do pokémon -->
+                <h3>Treinador: <%=pokemon.Tnome %></h3><!-- Exibe o nome do treinador do pokémon-->
             </div>
         </a>
-        <%})%>
+        <%})%> <!-- Fecha o js rodando-->
     </div>
 </body>
+
+<!-- Estilos individuais da página: -->
+<style>
+    h1{ /* 'Conheça os fofos' */
+        font-family: "Albert Sans", monospace;
+        font-size: 30px;
+        color: #3d3d3d;
+        margin-bottom: 0;
+    }
+    .top-info h2{
+        margin-bottom: 10px;
+    }
+    form{
+        margin-top: 5vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+    }
+    /* listaPokemons contém os cards */
+    .listaPokemons{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        gap: 5vw;
+        width: 98vw;
+        margin: 5vh 1vw;
+    }
+    /* Organização dos cards */
+    .card{
+        background-color: #e5eaeb;
+        width: 300px;
+        height: 450px;  
+        text-align: center;
+        border-radius: 5px;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    }
+    .card h2{
+        color: rgb(255, 0, 0);
+        font-family: "Nunito",monospace;
+        font-size: 22px;
+        padding-top: 10px;
+    }
+    .card h3{
+        color: rgb(64, 64, 64);
+        font-family: "Nunito",monospace;
+        font-size: 16px;
+    }
+    .card img{
+        width: 260px;
+        height: 260px;
+    }
+    /* ---- */
+</style>
 </html>

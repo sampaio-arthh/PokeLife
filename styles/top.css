@@ -1,19 +1,31 @@
+/* Esse css é uma padronização, definindo elementos comuns para evitar repetição */
+
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Varela+Round&display=swap');
+/* Importando fontes Nunito, Montserrat e Albert Sans */
+
+/* Resetando padrões de browser que podem atrapalhar a configuração do site */
 * {
     box-sizing: border-box;
     margin: 0;
     padding:0;
     border: 0;
 }
+
+/* Garantindo extensão total */
 html, body {
     width: 100%;
     overflow-x: hidden;
 }
+
+/* Fundo e textos padrões */
 body{ 
     background-color: #f4feff;
     color: rgb(20, 31, 41);
 }
+
+/* Configurando navbar */
 nav{
     width: 100vw;
     position: sticky;
@@ -39,11 +51,17 @@ nav{
     font-size: 18px;
     font-family: "Albert Sans", monospace;
     color: #FF0000;
-    gap: 2vw;
+    gap: 2vw; /* Espaço entre elementos */
 }
 a, a:hover, a:focus, a:active {
     text-decoration: none;
-    color: inherit;
+    color: inherit; /* Manter a cor pré-estabelecida para a classe do objeto contido em <a> */
+}
+/* Fim das config de navbar */
+
+/* Parte superior padrão */
+.top-info{
+    text-align: center;
 }
 .top-info h2{
     font-family: "Albert Sans", monospace;
@@ -52,27 +70,82 @@ a, a:hover, a:focus, a:active {
     margin-top: 0;
     margin-bottom: 5vh;
 }
-.top-info{
-    text-align: center;
-}
 .top-info h1{
     font-family: "Albert Sans", monospace;
     font-size: 30px;
     color: #3d3d3d;
     margin-bottom: 0;
 }
-input {
-    height: 22px;
+/* Fim da parte superior padrão */
+
+.addDiv{
+    margin: 2vh 0;
+}
+.l1{
+    display: grid;
+    gap: 8px;
+    text-align: left;
+}
+.l2{
+    display: grid;
+    gap: 8px;
+    text-align: left;
+}
+.caution{
+    display: flex;
+    justify-content: center;
+    margin-top: 25vh;
+}
+.caution h2 {
+    font-family: "Montserrat", monospace;
+    font-size: 22px;
+    margin-bottom: 10px;    
+}
+.cont{
+    display: grid;
+    text-align: center;
+    background-color: #3d3d3d; /* Ajustar em cada página */
+    padding: 20px 30px;
+    border-radius: 5px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    margin-bottom: 50px;
+}
+.cont button {
+    margin: 0 auto;
+}
+
+/* Padronizando elementos comuns */
+label{
+    font-family: "Albert Sans", monospace;
+    /* 'font-size' a ser decidido por ocasião*/
+    font-weight: 600;
+}
+.form-int{
+    display: flex;
+    width: 100vw;
+    height: 50vh;
+    justify-content: space-evenly;
+    align-items: center;
+}
+/* Padrão de design dos input's */
+input, select { 
+    height: 28px;
     width: 180px;
-    background-color: #eeeeee;
+    background-color: #fcfcfc;
     border: 3px solid #646464;
     border-radius: 5px;
+    font-family: "Montserrat", monospace;
+    font-size: 16px;
+    color: #3d3d3d;
 }
-.top-info input::placeholder{
-    color: #d4d4d4;
+input::placeholder{
+    color: #949494;
     font-family: "Nunito", monospace;
 }
-button{
+/* Fim dos input's */
+
+/* Botões da página */
+button {
     background-color: #E63434;
     color: #FFFFFF;
     font-family: "Nunito", monospace;
@@ -81,6 +154,18 @@ button{
     border: solid #E63434 2px;
     border-radius: 5px;
 }
+.t1 { /* Tipo 1 de botão */
+    background-color: #347ee6;
+    border: solid #347ee6 2px;
+}
+/* Tipo 2 = padrão vermelho */
+
+.t3 {
+    background-color: #e6b134;
+    border: solid #e6b134 2px;
+}
+
+/* Iframe e suas configurações */
 .video{
     margin-top: 5vh;
     text-align: center;
@@ -97,8 +182,4 @@ button{
     border-radius: 5px;
 }
 
-label{
-    font-family: "Albert Sans", monospace;
-    font-size: 22px;
-    font-weight: 600;
-}
+/* Fim da padronização */

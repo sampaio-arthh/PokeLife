@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Informações - <%=treinadores.nome%> </title>
-    <link rel="icon" type="image/x-icon" href="icon.png">
-    <link rel="stylesheet" href="top.css">
+    <link rel="stylesheet" href="top.css"> <!-- CSS da navbar e de algumas configurações padronizadas -->
+    <link rel="icon" type="image/x-icon" href="icon.png"> <!-- Logo da pokébola na guia -->
 </head>
 <body>
     <nav>
-        <div class="nav-in">
+        <div class="nav-in"> <!-- Cabeçalho padrão do site -->
             <a href="/"><h2>PokéLife</h2></a>
             <div class="cont-nav">
                 <a href="pokemons"><h3>Pokémons</h3></a>
@@ -17,19 +17,29 @@
                 <a href="battles"><h3>Batalhas</h3></a>
             </div>
         </div>
-    </nav>
+    </nav><!-- Fim do cabeçalho -->
 
-    <form id="trainerForm" method="post">
-        <input type="hidden" id="id_treinador" name="id_treinador" value="<%=treinadores.id_treinador%>">
-        <input type="text" id="inputNome" name="inputNome" value="<%=treinadores.nome%>" required>
-        <input type="number" id="inputIdade" name="inputIdade" value="<%=treinadores.idade%>" required>
-        <input type="text" id="inputCidade" name="inputCidade" value="<%=treinadores.cidade%>" required>
-        
-        <button type="submit" onclick="submitForm('/editarTrainer')">Salvar</button>
+    <h2>Atualizar dados</h2>
+    <form id="trainerForm" method="post"> <!-- Formulário de atualização -->
+        <div class="form-int"> <!-- Div organizadora de conteúdo -->
+            <div class="l1"> <!-- Lado 1 -->
+                <input type="hidden" id="id_treinador" name="id_treinador" value="<%=treinadores.id_treinador%>">
+                <label for="inputNome">Nome:</label>
+                <input type="text" id="inputNome" name="inputNome" value="<%=treinadores.nome%>" required>
+                <label for="inputIdade">Idade:</label>
+                <input type="number" id="inputIdade" name="inputIdade" value="<%=treinadores.idade%>" required>
+                <label for="inputCidade">Cidade:</label>
+                <input type="text" id="inputCidade" name="inputCidade" value="<%=treinadores.cidade%>" required>
+                <button type="submit" onclick="submitForm('/editarTrainer')">Salvar</button>
+            </div>
+        </div>
     </form>
-    <div class="caution">
-        <h2>Deseja excluir seu registro ?</h2>
-        <button onclick="confirmForm('/delTrainer')">Excluir Treinador</button>
+    <div class="caution"> <!-- Div de exclusão -->
+        <div class="cont"> <!-- Div organizadora de caution -->
+            <h2>Deseja excluir seu registro ?</h2>
+            <h3>Gostariamos que ficasse, mas entendemos</h3>
+            <button onclick="confirmForm('/delTrainer')">Excluir Treinador</button> <!-- Confirmar remoção-->
+        </div>
     </div>
 <script>
 function submitForm(action) {
@@ -37,7 +47,7 @@ const form = document.getElementById('trainerForm');
 form.action = action;
 form.submit();
 }
-function confirmForm(action) {
+function confirmForm(action) { /* Confirmar remoção */
     if(window.confirm("Você tem certeza disso ? Ao apagar um treinador, você apaga TODOS os registros de que ele faz parte (Batalhas e seus pokémons)")){
         const form = document.getElementById('trainerForm');
         form.action = action;
@@ -45,5 +55,41 @@ function confirmForm(action) {
     }
 }
 </script>
+<style>
+    .l1 button {
+        margin-top: 10px;
+    }
+    form{
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        margin: 2.5vh 0;
+    }
+    .form-int{
+        width: 20vw;
+        height: 40vh;
+        background-color: rgb(51, 146, 255);
+        border-radius: 5px;
+        box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+    }
+    label{
+        font-size: 20px;
+    }
+    .cont{
+        background-color: rgb(11, 109, 145);
+    }
+    .cont button {
+        width: 40%;
+        margin: 10px auto 0 auto;
+    }
+    h2, h3{
+        text-align: center;
+        font-family: "Nunito", monospace;
+        font-size: 24px;
+    }
+    h3{
+        font-size: 18px;
+    }
+</style>
 </body>
 </html>

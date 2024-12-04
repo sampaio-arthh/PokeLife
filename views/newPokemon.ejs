@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PokéLife - Cadastrar Pokémons</title>
-    <link rel="stylesheet" href="top.css">
-    <link rel="stylesheet" href="newPokemon.css">
-    <link rel="icon" type="image/x-icon" href="icon.png">
+    <link rel="stylesheet" href="top.css"> <!-- CSS da navbar e de algumas configurações padronizadas -->
+    <link rel="icon" type="image/x-icon" href="icon.png"> <!-- Logo da pokébola na guia -->
 </head>
 <body>
     <nav>
-        <div class="nav-in">
+        <div class="nav-in"> <!-- Cabeçalho padrão do site -->
             <a href="/"><h2>PokéLife</h2></a>
             <div class="cont-nav">
                 <a href="pokemons"><h3>Pokémons</h3></a>
@@ -18,39 +17,82 @@
                 <a href="battles"><h3>Batalhas</h3></a>
             </div>
         </div>
-    </nav>
-        <form method="post" id="pokemonForm">
-            <div class="form-int">
-                <div class="container">
-                    <input type="text" placeholder="Nome do Pokemon" id="inputNome" name="inputNome" required>
-                    <select name="selId_treinador" id="selId_treinador">
-                        <% treinadores.forEach((treinador) => { %>
-                            <option value="<%=treinador.id_treinador %>"><%= treinador.id_treinador %> - <%= treinador.nome %></option>
-                        <% }); %>
-                    </select>
-                    <input type="text" placeholder="Tipo" id="inputTipo" name="inputTipo" required>
-                    <input type="text" placeholder="Nível" id="inputNvl" name="inputNvl" required>
-                    <input type="text" placeholder="URL da imagem" id="inputUrl" name="inputUrl" oninput="atualizarImagemPreview()" required>
-                    <button type="submit" onclick="submitForm('/addPokemon')">Cadastrar</button>
-                </div>
-                <img src="icon.png" alt="" draggable="false" id="imagemPreview">
+    </nav><!-- Fim do cabeçalho -->
+    <h1>Mais um fofinho para o grupo !</h1>
+    <form method="post" id="pokemonForm"> <!-- Formulário de atualização -->
+        <div class="form-int"><!-- Div organizadora de conteúdo -->
+            <div class="l1"><!-- Lado 1 -->
+                <input type="text" placeholder="Nome do Pokemon" id="inputNome" name="inputNome" required>
+                <select name="selId_treinador" id="selId_treinador"> <!-- select com todos os id's e nomes de treinadores -->
+                    <% treinadores.forEach((treinador) => { %> <!-- Para cada elemento 'treinador' do dict -->
+                        <option value="<%=treinador.id_treinador %>"><%= treinador.id_treinador %> - <%= treinador.nome %></option> <!-- Exibe as informções(id / nome) do treinador -->
+                    <% }); %>
+                </select>
+                <input type="text" placeholder="Tipo" id="inputTipo" name="inputTipo" required>
+                <input type="text" placeholder="Nível" id="inputNvl" name="inputNvl" required>
+                <input type="text" placeholder="URL da imagem" id="inputUrl" name="inputUrl" oninput="atualizarImagemPreview()" required>
+                <button type="submit" onclick="submitForm('/addPokemon')">Cadastrar</button>
             </div>
-        </form>
-        <div class="extra">
-            <h2>Se ainda não faz parte</h2>
-            <h3>E quer ter seu pokémon</h3>
-            <a href="/newTrainer"><button class="add">Inscrever-se</button></a>
+            <div class="l2"><img src="icon.png" alt="" draggable="false" id="imagemPreview"> <!-- imagem dinâmica --></div><!-- Lado 2 -->
         </div>
-        <script>
-            function submitForm(action) {
-            const form = document.getElementById('pokemonForm');
-            form.action = action;
-            form.submit();
-            }
-            function atualizarImagemPreview() {
-            const url = document.getElementById("inputUrl").value;
-            document.getElementById("imagemPreview").src = url;
-            }
-        </script>
-    </body>
-    </html>
+    </form>
+    <div class="caution"> <!-- Classe padronizada de remoção tendo layout aproveitado -->
+        <div class="cont">
+            <h2>Se ainda não faz parte</h2>
+            <h3>E quer ter seu pokémon aqui</h3>
+            <a href="/newTrainer"><button class="add">Inscreva-se</button></a>
+        </div>
+    </div>
+<script>
+    function submitForm(action) {
+    const form = document.getElementById('pokemonForm');
+    form.action = action;
+    form.submit();
+    }
+    function atualizarImagemPreview() { /* Atualização da imagem */
+    const url = document.getElementById("inputUrl").value;
+    document.getElementById("imagemPreview").src = url;
+    }
+</script>
+</body>
+<style>
+    h1{
+        text-align: center;
+        font-family: "Nunito", monospace;
+        font-size: 24px;
+        font-weight: 700;
+        margin-top: 2.5vh;
+    }
+    /* Organziando o form */
+    form{
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        margin: 2.5vh 0;
+    }
+    .form-int{
+        width: 50vw;
+        height: 40vh;
+        background-color: #9ee934;
+        border-radius: 5px;
+        box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+        margin: 0 0 2vh 0; /* Dando espaço entre o form e .caution */
+    }
+
+    img{
+        width: 200px;
+        height: 200px;
+    }
+    .caution{
+        margin-top: 10vh;
+    }
+    .cont{
+        background-color: rgb(253, 253, 112);
+    }
+    .cont h3 {
+        font-family: "Montserrat", monospace;
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+</style>
+</html>

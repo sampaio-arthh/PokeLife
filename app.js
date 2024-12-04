@@ -48,7 +48,6 @@ app.get("/pokemons", (req, res) => { //Ao receber a rota /pokemons:
         if (error) { //Se algo der errado
             console.log("Ocorreu um erro ao buscar todos os pokemons \n", error); //Avise no console
             res.redirect("/"); //Volte para a home
-            window.alert("Algo deu errado"); //Avise na tela para o usuário
         } else { //Se ocorreu naturalmente
             res.render("pokemons", { pokemons: results }); // Passando os dados para a view no dicionário pokemons
             //Estrutura dict pokemons => {p.nome : valor(p.nome), p.id_pokemon : valor(p.id_pokemon), nvl : valor(nvl), link : valor(link), t.id_treinador : valor(t.id_treinador)}
@@ -83,17 +82,31 @@ app.get("/trainers", (req, res)=>{
     })
 })
 
-app.get("/pesquisarTrainer", (req, res) =>{
-    const pesquisa = req.query.pesquisa;
-    db.query("SELECT t.id_treinador, t.nome, t.idade, t.cidade, COUNT(b.id_treinador_vencedor) AS vitorias FROM treinador t LEFT JOIN batalha b ON t.id_treinador = b.id_treinador_vencedor WHERE t.nome LIKE ? OR t.cidade = ? OR CAST(idade AS CHAR) = ? GROUP BY t.id_treinador, t.nome, t.idade, t.cidade", [`%${pesquisa}%`, pesquisa, pesquisa], (error, results) => {
-        if(error){
+app.get("/pesquisarTrainer", (req, res) => { // Rota de pesquisa
+    const pesquisa = req.query.pesquisa;//'pesquisa' recebe o valor do <input name='pesquisa'>
+    if (!pesquisa) {
+        // Caso não haja pesquisa, retorna todos os treinadores
+        return res.render("trainers", { treinadores: [] });
+    }
+    
+    const query = `
+        SELECT t.id_treinador, t.nome, t.idade, t.cidade, COUNT(b.id_treinador_vencedor) AS vitorias
+        FROM treinador t
+        LEFT JOIN batalha b ON t.id_treinador = b.id_treinador_vencedor
+        WHERE t.nome LIKE ? OR t.cidade = ? OR CAST(t.idade AS CHAR) = ?
+        GROUP BY t.id_treinador, t.nome, t.idade, t.cidade
+    `;
+    
+    db.query(query, [`%${pesquisa}%`, pesquisa, pesquisa], (error, results) => {
+        if (error) {
             console.log("Houve um erro ao realizar a pesquisa\n", error);
+            return res.status(500).send("Erro interno do servidor");
+        } else {
+            res.render("trainers", { treinadores: results }); // Exibe os resultados
         }
-        else{
-            res.render("trainers", { treinadores : results }) //results são os resultados da pesquisa que usa o LIKE
-        }
-    })
+    });
 });
+
 
 app.get("/battles", (req, res)=>{
     db.query("SELECT b.id_batalha, t1.nome AS treinador1, p1.nome AS pokemon1, t2.nome AS treinador2, p2.nome AS pokemon2, tv.nome AS treinador_vencedor, p1.link AS link1, p2.link AS link2 FROM batalha b JOIN treinador t1 ON b.id_treinador1 = t1.id_treinador JOIN pokemon p1 ON b.id_pokemon1 = p1.id_pokemon JOIN treinador t2 ON b.id_treinador2 = t2.id_treinador JOIN pokemon p2 ON b.id_pokemon2 = p2.id_pokemon JOIN treinador tv ON b.id_treinador_vencedor = tv.id_treinador;", (error, results) =>{
@@ -278,6 +291,38 @@ app.post("/addTrainer", (req, res) =>{
     })
 })
 
+app.get("/newBattle", (req, res)  => {
+    db.query("SELECT t.id_treinador, t.nome FROM treinador t;", (error, resultsTreinadores) => {
+        if (error) {
+            console.log(error);
+            res.redirect("/");
+        }
+        db.query("SELECT p.id_pokemon, p.nome FROM pokemon p;", (error, resultsPokemon) => {
+            if (error) {
+                console.log(error);
+                res.redirect("/");
+            }
+            res.render("newBattle", {treinadores : resultsTreinadores, pokemons : resultsPokemon})
+        })
+    })
+})
+
+app.post("/addBattle", (req, res) => {
+    const id_treinador1 = req.body.selId_treinador1;
+    const id_treinador2 = req.body.selId_treinador2;
+    const id_pokemon1 = req.body.selId_pokemon1;
+    const id_pokemon2 =  req.body.selId_pokemon2;
+    const data = req.body.inputData;
+    const id_treinador_vencedor = req.body.selId_treinador_vencedor;
+    db.query("INSERT INTO batalha (id_treinador1, id_treinador2, id_pokemon1,  id_pokemon2, data, id_treinador_vencedor ) values (?,?,?,?,?,?)", [id_treinador1,id_treinador2,id_pokemon1,id_pokemon2,data,id_treinador_vencedor], (err, results) => {
+        if(err) {
+            console.log(err);
+            res.redirect("/")
+        }
+        res.redirect("battles")
+    })
+})
+
 app.post("/delPokemon", (req, res) => {
     const id_pokemon = req.body.id_pokemon;
     db.query("DELETE FROM batalha WHERE id_pokemon1 = ? OR id_pokemon2 = ?", [id_pokemon, id_pokemon], (err, results) =>{
@@ -367,3 +412,14 @@ app.post("/delTrainer", (req, res) => {
         });
     });
 });
+
+app.post("/delBattles", (req, res) => {
+    const id_batalha = req.body.id_batalha;
+    db.query("DELETE FROM batalha WHERE id_batalha = ?", [id_batalha], (err, results)  => {
+        if(err){
+            console.log(err);
+            res.redirect("/");
+        }
+        res.redirect("/battles")
+    })
+})

@@ -20,60 +20,107 @@
     </nav> <!-- Fim do cabeçalho -->
 
     <form id="battlesForm" method="post"> <!-- Formulário de edição da batalha -->
-        <input type="hidden" id="id_batalha" name="id_batalha" value="<%=batalha.id_batalha%>">
+        <div class="form-int">
+            <div class="l1">
+                <input type="hidden" id="id_batalha" name="id_batalha" value="<%=batalha.id_batalha%>">
+                <label for="selId_treinador1">Treinador 1</label>
+                <select id="selId_treinador1" name="selId_treinador1">
+                    <% treinadores.forEach((treinador) => { %>
+                        <option value="<%= treinador.id_treinador %>"
+                            <% if (treinador.id_treinador == batalha.id_treinador1) { %> selected <% } %>>
+                            <%= treinador.id_treinador %> - <%= treinador.nome %>
+                        </option>
+                    <% }); %>
+                </select>   
+                <label for="selId_pokemon1">Pokemon 1</label>
+                <select id="selId_pokemon1" name="selId_pokemon1">
+                    <% pokemons.forEach((pokemon) => { %>
+                        <option value="<%= pokemon.id_pokemon %>"
+                            <% if (pokemon.id_pokemon == batalha.id_pokemon1) { %> selected <% } %>>
+                            <%= pokemon.id_pokemon %> - <%= pokemon.nome %>
+                        </option>
+                    <% }); %>
+                </select>
 
-        <select id="selId_treinador1" name="selId_treinador1">
-            <% treinadores.forEach((treinador) => { %>
-                <option value="<%= treinador.id_treinador %>"
-                    <% if (treinador.id_treinador == batalha.id_treinador1) { %> selected <% } %>>
-                    <%= treinador.id_treinador %> - <%= treinador.nome %>
-                </option>
-            <% }); %>
-        </select>   
-        <select id="selId_pokemon1" name="selId_pokemon1">
-            <% pokemons.forEach((pokemon) => { %>
-                <option value="<%= pokemon.id_pokemon %>"
-                    <% if (pokemon.id_pokemon == batalha.id_pokemon1) { %> selected <% } %>>
-                    <%= pokemon.id_pokemon %> - <%= pokemon.nome %>
-                </option>
-            <% }); %>
-        </select>
+                <label for="selId_treinador2">Treinador 2</label>
+                <select id="selId_treinador2" name="selId_treinador2">
+                    <% treinadores.forEach((treinador) => { %>
+                        <option value="<%= treinador.id_treinador %>"
+                            <% if (treinador.id_treinador == batalha.id_treinador2) { %> selected <% } %>>
+                            <%= treinador.id_treinador %> - <%= treinador.nome %>
+                        </option>
+                    <% }); %>
+                </select>
+                <label for="selId_pokemon2">Pokemon 2</label>
+                <select id="selId_pokemon2" name="selId_pokemon2">
+                    <% pokemons.forEach((pokemon) => { %>
+                        <option value="<%= pokemon.id_pokemon %>"
+                            <% if (pokemon.id_pokemon == batalha.id_pokemon2) { %> selected <% } %>>
+                            <%= pokemon.id_pokemon %> - <%= pokemon.nome %>
+                        </option>
+                    <% }); %>
+                </select>
 
-        <select id="selId_treinador2" name="selId_treinador2">
-            <% treinadores.forEach((treinador) => { %>
-                <option value="<%= treinador.id_treinador %>"
-                    <% if (treinador.id_treinador == batalha.id_treinador2) { %> selected <% } %>>
-                    <%= treinador.id_treinador %> - <%= treinador.nome %>
-                </option>
-            <% }); %>
-        </select>
-        <select id="selId_pokemon2" name="selId_pokemon2">
-            <% pokemons.forEach((pokemon) => { %>
-                <option value="<%= pokemon.id_pokemon %>"
-                    <% if (pokemon.id_pokemon == batalha.id_pokemon2) { %> selected <% } %>>
-                    <%= pokemon.id_pokemon %> - <%= pokemon.nome %>
-                </option>
-            <% }); %>
-        </select>
-        <select id="selId_treinador_vencedor" name="selId_treinador_vencedor">
-            <% treinadores.forEach((treinador) => { %>
-                <option value="<%= treinador.id_treinador %>"
-                    <% if (treinador.id_treinador == batalha.id_treinador_vencedor) { %> selected <% } %>>
-                    <%= treinador.id_treinador %> - <%= treinador.nome %>
-                </option>
-            <% }); %>
-        </select>
-        <input type="date" value="<%=batalha.data%>" name="inputData" id="inputData">
-        
-        
-        <button type="submit" onclick="submitForm('/editarBattle')">Salvar</button>
+            </div>
+            <div class="l2">
+                <label for="inputData">Data</label>
+                <input type="date" value="<%=batalha.data%>" name="inputData" id="inputData">
+
+                <label for="selId_treinador_vencedor">Treinador Vencedor</label>
+                <select id="selId_treinador_vencedor" name="selId_treinador_vencedor">
+                    <% treinadores.forEach((treinador) => { %>
+                        <option value="<%= treinador.id_treinador %>"
+                            <% if (treinador.id_treinador == batalha.id_treinador_vencedor) { %> selected <% } %>>
+                            <%= treinador.id_treinador %> - <%= treinador.nome %>
+                        </option>
+                    <% }); %>
+                </select>
+
+                <button type="submit" onclick="submitForm('/editarBattle')">Salvar</button>
+            </div>
+        </div>
+    
     </form>
+    <div class="caution">
+        <div class="cont">
+            <h2>Quer excluir essa batalha ?</h2>
+            <button onclick="confirmForm('/delBattles')">Excluir Batalha</button>
+        </div>
+    </div>
 <script>
 function submitForm(action) {
 const form = document.getElementById('battlesForm');
 form.action = action;
 form.submit();
 }
+function confirmForm(action) {
+    if(window.confirm("Você tem certeza disso ? Quer realmente apagar uma batalha ?")){
+        const form = document.getElementById('battlesForm');
+        form.action = action;
+        form.submit();
+    }
+}
 </script>
+<style>
+    form{
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        margin: 2.5vh 0;
+    }
+    .form-int{
+        width: 50vw;
+        height: 40vh;
+        background-color: rgb(255, 153, 51);
+        border-radius: 5px;
+        box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+    }
+    label{
+        font-size: 20px;
+    }
+    .cont{
+        background-color: rgb(60, 158, 245);
+    }
+</style>
 </body>
 </html>

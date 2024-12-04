@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PokéLife - Treinadores</title>
-    <link rel="stylesheet" href="top.css">
+    <link rel="stylesheet" href="top.css"> <!-- CSS da navbar e de algumas configurações padronizadas -->
     <link rel="stylesheet" href="trainers.css">
-    <link rel="icon" type="image/x-icon" href="icon.png">
+    <link rel="icon" type="image/x-icon" href="icon.png"> <!-- Logo da pokébola na guia -->
 </head>
 <body>
     <nav>
-        <div class="nav-in">
+        <div class="nav-in"> <!-- Cabeçalho padrão do site -->
             <a href="/"><h2>PokéLife</h2></a>
             <div class="cont-nav">
                 <a href="pokemons"><h3>Pokémons</h3></a>
@@ -18,31 +18,98 @@
                 <a href="battles"><h3>Batalhas</h3></a>
             </div>
         </div>
-    </nav>
-    <div class="top-info">
+    </nav><!-- Fim do cabeçalho -->
+
+    <div class="top-info"> <!-- Div de apresentação -->
         <h1>Conheça nossos membros !</h1>
         <h2>Essa é a turma da pesada</h2>
-        <h3>Ainda não faz parte da galera ?</h3>
-        <a href="/newTrainer"><button class="add">Inscrever-se</button></a>
-        <form action="/pesquisarTrainer" method="get">
-            <input type="search" name="pesquisa" placeholder="Treinador/Cidade/Idade">
-            <button type="submit">Pesquisar</button>
+
+        <div class="addDiv"> <!-- Div responsável por guardar elementos relacionados a inserir novos registros-->
+            <h3>Ainda não faz parte da galera ?</h3>
+            <a href="/newTrainer"><button>Inscrever-se</button></a>
+        </div>
+
+        <form action="/pesquisarTrainer" method="get"> <!-- Seção de pesquisa -->
+            <input type="search" name="pesquisa" placeholder="Treinador/Cidade/Idade"> <!-- input que passa o valor digitado -->
+            <button type="submit" class="t3">Pesquisar</button> <!-- Envia dados -->
         </form>
     </div>
     
-    <div class="trainer-section">
-        <% treinadores.forEach((treinador) => { %>
-        <a href="/infoTrainers?id_treinador=<%= treinador.id_treinador%>" class="card-link">
-        <div class="treinador">
-            <div class="tr-info">
-                <h3>Nome: <%= treinador.nome %></h3>
-                <h4>Cidade de origem: <%= treinador.cidade %></h4>
-                <h4>Idade: <%= treinador.idade %> anos</h4>
-                <h4>Batalhas vencidas: <%= treinador.vitorias %></h4>
+    <div class="trainer-section"> <!-- Div que contém todas as boxes -->
+        <% treinadores.forEach((treinador) => { %> <!-- Para cada elemento 'treinador' do dict -->
+        <a href="/infoTrainers?id_treinador=<%= treinador.id_treinador%>" class="card-link"> <!-- Link direto para a página de info individual através do GET-->
+            <div class="treinador"><!-- Box padronizada para cada registro-->
+
+                <div class="tr-info"> <!-- Exibe as informções do treinador -->
+                    <h3>Nome: <%= treinador.nome %></h3>
+                    <h4>Cidade de origem: <%= treinador.cidade %></h4>
+                    <h4>Idade: <%= treinador.idade %> anos</h4>
+                    <h4>Batalhas vencidas: <%= treinador.vitorias %></h4>
+                </div>
+
             </div>
-        </div>
         </a>
-        <%})%>
+        <%})%> <!-- Fecha o js rodando-->
     </div>
 </body>
+
+<!-- Estilos individuais da página: -->
+<style>
+    .top-info h2{
+        margin-top: 10px;
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+    .top-info h3{
+        margin: 0;
+        font-family: "Nunito", monospace;
+        font-size: 18px;
+        font-weight: 300;
+        margin-bottom: 10px;
+    }
+    form{
+        margin-top: 3vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+    }
+    .trainer-section{ /* Garantindo tamanho correto da div */
+        display: flex;
+        width: 100vw;
+        flex-wrap: wrap; /* Passando de linha quando acaba */
+        margin-top: 5vh;
+    }
+    .treinador{ /* Padrão para a box */
+        height: 300px;
+        width: 25vw;
+        flex: 0 0 25%;
+        align-content: center;
+    }
+    /* Texto da box */
+    .treinador h3 {
+        font-family: "Nunito", monospace;
+        font-size: 28px
+    }
+    /* Texto da box */
+    .treinador h4 {
+        font-family: "Montserrat", monospace;
+        font-size: 20px;
+    }
+    .tr-info{
+        margin-left: 3vw;
+    }
+
+    /* Cores alternadas: */
+    .trainer-section a:nth-child(odd) {
+        background-color: #b30000;
+        color: #f2f2f2 ;
+    }
+
+    .trainer-section a:nth-child(even) {
+        background-color: #0a7cee; 
+        color: #010822;
+    }
+
+</style>
 </html>
